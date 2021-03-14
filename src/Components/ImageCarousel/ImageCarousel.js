@@ -10,38 +10,26 @@ import { Carousel } from 'react-responsive-carousel';
 
 
 const ImageCarousel = (props) => {
-    console.log('thi')
     // const [products, setProducts] = useState([]);
     // const [loading, setLoading] = useState(false);
     // const [error, setError] = useState(false);
-    const { loading, products, error } = useSelector((state) => state.Home);
+    const { loading, error } = useSelector((state) => state.Home);
+    const { productInfo } = useSelector((state) => state.ProductDetails);
     const dispatch = useDispatch()
-
-
-
+    
     return (
         <div className='ImageCarousel-container' >
-                {loading ? (<LoadingBox></LoadingBox>) : error ? (<MessageBox variant='danger' >{error} </MessageBox>) : (
-                    <div className='row center'>
-                        { products.map((product) => (
-                            <Product key={product._id} product={product}></Product>
-                        ))}
+            {loading ? (<LoadingBox></LoadingBox>) : error ? (<MessageBox variant='danger' >{error} </MessageBox>) : (
+            console.log('productInfo: ',productInfo),
+            <Carousel>
+                {productInfo._id && productInfo.image.map((item, i) => (
+                    <div key = {productInfo._id+i}>
+                        <img src={item} alt={productInfo.name} />
+                        <p className="legend">Legend {i}</p>
                     </div>
-                )}
-                <Carousel>
-                <div>
-                    <img src={props.src} alt = {props.alt} />
-                    <p className="legend">Legend 1</p>
-                </div>
-                <div>
-                    <img src={props.src} alt = {props.alt}/>
-                    <p className="legend">Legend 2</p>
-                </div>
-                <div>
-                    <img src={props.src} alt = {props.alt}/>
-                    <p className="legend">Legend 3</p>
-                </div>
+                ))}
             </Carousel>
+            )}
         </div>
     );
 }

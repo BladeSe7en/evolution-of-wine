@@ -29,16 +29,16 @@ export default function ProductDetails(props) {
 
     return (
         <div className='details-container'>
-            {loading ? (
+            {loading  ? (
                 <LoadingBox></LoadingBox>
-            ) : error ? (
+            ) : error || productInfo.lenght === 0 ? (
                 <MessageBox variant="danger">{error}</MessageBox>
             ) : (
                 <div>
                     <NavBarMini/>
                     <div className="row top">
                         <div className="col-2">
-                            <ImageCarousel src={productInfo.image} alt={productInfo.name}/>
+                            <ImageCarousel productInfo = {productInfo}/>
                             
                         </div>
                         <div className="col-1">

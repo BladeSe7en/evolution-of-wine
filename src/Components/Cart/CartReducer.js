@@ -59,7 +59,9 @@ export default function CartReducer(state = initialstate, action) {
         }
 
         case 'REMOVE_FROM_CART': {
-            localStorage.setItem('cartItems', JSON.stringify(state.cartItems.filter((x) => x._id !== payload.productId)));
+            //localStorage.setItem('cartItems', JSON.stringify(state.cartItems.filter((x) => x._id !== payload.productId)));
+            localStorage.removeItem('cartItems', JSON.stringify(state.cartItems.filter((x) => x._id === payload.productId)));
+
             return {
                 ...state,
             cartItems: state.cartItems.filter((x) => x._id !== payload.productId)

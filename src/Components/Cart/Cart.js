@@ -35,18 +35,18 @@ export default function CartScreen(props) {
         <div className='cart-container'>
             <NavBarMini />
             <div className='row top top-margin'>
-                <div className='col-2 border'>
+                <div className='col-2'>
                     {cartItems.length === 0 ? (
                         <MessageBox>
                             Cart is empty. <Link to='/'>Go Shopping</Link>
                         </MessageBox>
                     ) : (
-                        <ul>
+                        <ul className = 'border'>
                             {cartItems.map((item) => (
                                 <li key={item._id}>
                                     <div id = 'cart-item-grid'>
                                         <div id = 'item-icon'>
-                                            <img src={item.image} alt={item.name} className='small' />
+                                            <img src={item.image[0]} alt={item.name} className='small' />
                                         </div>
                                         <div id = 'item-name' className='min-30'>
                                             <Link to={`/product/${item._id}`}>{item.name}</Link>

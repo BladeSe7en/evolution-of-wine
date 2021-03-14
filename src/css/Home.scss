@@ -149,7 +149,7 @@ a.brand {
     flex: 2 1 50rem;
     justify-content: center;
     display: flex;
-    margin-top: 50px;
+    margin: 50px;
 }
 
 .min-30 {
@@ -221,10 +221,12 @@ img.large {
     justify-content: center;
     display: grid;
     grid-template-areas: "item-icon item-name item-quantity-selector item-price item-delete";
-    grid-template-columns: 50px 60% 75px 75px 75px;
+    grid-template-columns: 18% 18% 18% 18% 18%;
     grid-gap: 10px;
-    //background-color: #004d1a;
-    padding-top: 5px;
+    padding: 1%;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
 }
 
 
@@ -247,6 +249,8 @@ img.large {
 
 .border {
     border: 3px solid #004d1a;
+    list-style-type: none;
+    width: 100%;
 }
 
 .top-margin {
@@ -269,3 +273,4 @@ img.large {
 .ImageCarousel-container {
     margin: 50px;
 }
+
