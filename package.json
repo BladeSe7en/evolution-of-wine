@@ -37,7 +37,7 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "react-scripts test",
-    "start": "concurrently \"npm run start-server-prod\" \"npm run start-front\" --kill-others"
+    "start": "concurrently \"npm run start-server-prod\" \"npm run start-front\""
   },
   "proxy": "http://localhost:3001",
   "eslintConfig": {

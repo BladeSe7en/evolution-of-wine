@@ -24,7 +24,7 @@ app.get('/api/products/:id', (req, res) => {
 app.get('/', (req, res) => {
     res.send('Server is ready');
 });
-const port = process.env.PORT+1 || 3001;
+const port = process.env.PORT || 3001;
 console.log('THIS IS PORT: ', port)
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
