@@ -32,11 +32,12 @@
   },
   "scripts": {
     "start-server": "nodemon server/server.js --watch server/*",
+    "start-server-prod": "node server/server.js",
     "start-front": "react-scripts start  --parallel \"npm run scss && npm run scss -- -w\"",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "react-scripts test",
-    "start": "concurrently \"npm run start-server\" \"npm run start-front\" --kill-others"
+    "start": "concurrently \"npm run start-server-prod\" \"npm run start-front\" --kill-others"
   },
   "proxy": "http://localhost:3001",
   "eslintConfig": {
