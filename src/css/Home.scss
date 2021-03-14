@@ -1,0 +1,271 @@
+@keyframes fadeInImg {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.img-loading {
+    opacity: 0;
+    width: 100%;
+    height: auto;
+   // z-index: -1;
+}
+.img-loaded {
+    animation: fadeInImg cubic-bezier(0.23, 1, 0.32, 1) 1;
+    position: relative;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+    animation-delay: 0.3s;
+   // z-index: -1;
+}
+
+
+
+.home-container {
+    background-color: #e6ffee;
+}
+
+.signin-container {
+    height: 100%;
+}
+
+.cart-container {
+    background-color: #e6ffee;
+    height: 100%;
+    li:nth-child(even) {
+        background: #b2e0b3;
+    }
+}
+
+.construction-div {
+    display: block;
+    justify-items: center;
+    margin: 0 auto;
+    text-align: center;
+}
+
+html {
+    font-size: 62.5%; /* 16px x 62.5 = 10px = 1rem */
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    height: 100vh;
+    font-size: 1.6rem;
+    font-family: Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+#root {
+    height: 100%;
+}
+
+/* Layout */
+.grid-container {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: 5rem 1fr 5rem;
+    height: 100%;
+}
+header {
+    grid-area: header;
+    background-color: #203040;
+}
+
+footer {
+    grid-area: footer;
+    background-color: #004d1a;
+    color: #ffffff;
+}
+/* Common */
+h1 {
+    font-size: 1.8rem;
+    padding: 1rem 0;
+}
+h2 {
+    font-size: 1.6rem;
+    padding: 1rem 0;
+}
+
+a {
+    text-decoration: none;
+}
+a:hover {
+    color: #ff8000;
+}
+ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+li {
+    margin-top: 1rem;
+}
+
+/* Header */
+header a {
+    color: #ffffff;
+    padding: 1rem;
+}
+a.brand {
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.badge {
+    background-color: #f02020;
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 0.2rem 0.7rem;
+    margin-left: 0.2rem;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.row.center {
+    justify-content: center;
+}
+.row.top {
+    align-items: flex-start;
+}
+.col-1 {
+    flex: 1 1 25rem;
+    padding-right: 60px;
+    margin: auto;
+}
+.col-2 {
+    flex: 2 1 50rem;
+    justify-content: center;
+    display: flex;
+    margin-top: 50px;
+}
+
+.min-30 {
+    min-width: 30rem;
+}
+/* Image */
+img {
+    border-radius: 0.5rem;
+}
+img.small {
+    max-width: 5rem;
+    width: 100%;
+}
+img.medium {
+    max-width: 29rem;
+    width: 100%;
+}
+img.large {
+    width: 100%;
+}
+
+/* Card */
+.card {
+    border: 0.1rem #c0c0c0 solid;
+    background-color: #f8f8f8;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    box-shadow: 5px 10px 18px #888888;
+}
+.card-body {
+    padding: 1rem;
+}
+.card-body > * {
+    margin-bottom: 0.5rem;
+}
+.price {
+    font-size: 2rem;
+}
+/* Rating */
+.rating span {
+    color: #f0c040;
+    margin: 0.1rem;
+}
+.success {
+    color: #20a020;
+}
+.danger {
+    color: #a02020;
+}
+.alert {
+    padding: 1rem;
+    border: 0.1rem solid transparent;
+    border-radius: 0.5rem;
+}
+.alert-info {
+    color: #2020a0;
+    background-color: #e0e0ff;
+}
+.alert-danger {
+    color: #a02020;
+    background-color: #ffe0e0;
+}
+
+.quantity-selector {
+    width: 50px;
+}
+
+#cart-item-grid {
+    justify-content: center;
+    display: grid;
+    grid-template-areas: "item-icon item-name item-quantity-selector item-price item-delete";
+    grid-template-columns: 50px 60% 75px 75px 75px;
+    grid-gap: 10px;
+    //background-color: #004d1a;
+    padding-top: 5px;
+}
+
+
+#item-icon {
+    grid-area: "item-icon";
+}
+
+#item-name {
+    grid-area: "item-name";
+}
+#item-quantity-selector {
+    grid-area: "item-quantity-selector";
+}
+#item-price {
+    grid-area: "item-price";
+}
+#item-delete {
+    grid-area: "item-delete";
+}
+
+.border {
+    border: 3px solid #004d1a;
+}
+
+.top-margin {
+    margin-top: 50px;
+}
+
+
+.is-visible {
+    z-index: -1;
+}
+
+.height {
+    height: 100%;
+}
+
+.carousel-root {
+    width: 60%;
+}
+
+.ImageCarousel-container {
+    margin: 50px;
+}

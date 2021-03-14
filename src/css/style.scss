@@ -1,0 +1,20 @@
+$font: 'Open Sans', sans-serif;
+$primary-color: #146fa5;
+$secondary-color: #ff5041;
+$background-color: #f1f1f1;
+$dark-gray: #313131;
+$off-white: #fbfbfb;
+
+@import 'NavBar';
+@import 'Home';
+@import 'ProductDetails';
+
+html{
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: $font;
+    background-size: cover;
+    margin: 0;
+}

@@ -1,0 +1,25 @@
+.logo-header {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-btn-header {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-btn {
+  background-color: red;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background-size: cover;
+  margin: 0;
+}
+
+/*# sourceMappingURL=style.css.map */
