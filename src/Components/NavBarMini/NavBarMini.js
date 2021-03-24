@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
 import { updateTotalCartItems } from '../Cart/CartActions';
+import { signout } from '../SignIn/SignInActions';
 
 
 const NavBarMini = () => {
@@ -20,7 +21,7 @@ const NavBarMini = () => {
                 qty: previousValue.qty + currentValue.qty,
             }
         });
-        console.log('total: ',total)
+        console.log('total: ', total)
         let sum = total === 0 ? 0 : total.qty
         dispatch(updateTotalCartItems(sum))
     }, [dispatch, cartItems])
@@ -34,7 +35,7 @@ const NavBarMini = () => {
         let offSet = window.pageYOffset
         // (window.location.pathname !== '/') ? offSet = window.pageYOffset : offSet = window.pageYOffset
 
-        if (offSet-20 > (elTopOffset + elHeight)) {
+        if (offSet > (elTopOffset + elHeight)) {
             setSticky({ isSticky: true, offset: elHeight });
         } else {
             setSticky({ isSticky: false, offset: 0 });
@@ -59,13 +60,45 @@ const NavBarMini = () => {
 
     }, []);
 
+
+    const signoutHandler = () => {
+        dispatch(signout())
+    }
+
     return (
-        <div className='nav-container'>
-            <div className={`sticky-wrapper${sticky.isSticky ? ' sticky' : ''}`} ref={headerRef}>
-                <div className='nav-btn-header'>
+        <div className={`sticky-wrapper${sticky.isSticky ? ' sticky' : ''}`} ref={headerRef}>
+            <nav id="hamnav">
+                <div className='small-screen-nav'>
+
+                    <label htmlfor="hamburger">&#9776;</label>
+                    <div className="hamburger-dropdown">
+                        <input type="checkbox" id="hamburger" className="dropbtn" />
+                        <div className="burger-dropdown-content">
+                            <a href="example.com">Category 1</a>
+                            <a href="example.com">Category 2</a>
+                            <a href="example.com">Category 3</a>
+                        </div>
+                    </div>
+
+                    <div id='mini-search' className='search-bar'>
+                        <div className="dropdown">
+                            <button className="dropbtn">All <img src={'/images/chevron_down.png'} className="chevron" alt="logo" /></button>
+                            <div className="dropdown-content">
+                                <a href="example.com">Category 1</a>
+                                <a href="example.com">Category 2</a>
+                                <a href="example.com">Category 3</a>
+                            </div>
+                        </div>
+                        <input></input>
+                        <div>
+                            <button className='nav-btn' onClick={() => setChange(!change)}> <img className='search-icon' src={'/images/seach_icon.png'} alt="logo" /> </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="hamitems">
                     <Link to="/" id='home' className='home-icon'>
-                        <img src={'/images/home-icon.png'} className="home-icon" alt="logo" />
-                        {/* <button className="btn"onClick={this.returnToMainPage}>Main Page</button> */}
+                        <img src={'/images/home-icon-white.png'} className="home-icon" alt="logo" />
                     </Link>
 
                     <div id='ship-to' className='deliver-to'>
@@ -77,24 +110,35 @@ const NavBarMini = () => {
                         <div className="dropdown">
                             <button className="dropbtn">All <img src={'/images/chevron_down.png'} className="chevron" alt="logo" /></button>
                             <div className="dropdown-content">
-                                <a href="#">Category 1</a>
-                                <a href="#">Category 2</a>
-                                <a href="#">Category 3</a>
+                                <a href="example.com">Category 1</a>
+                                <a href="example.com">Category 2</a>
+                                <a href="example.com">Category 3</a>
                             </div>
                         </div>
                         <input></input>
                         <div>
-                            <button className='nav-btn' onClick={() => setChange(!change)}> <img className='search-icon' src={'/images/seach_icon.png'} /> </button>
+                            <button className='nav-btn' onClick={() => setChange(!change)}> <img className='search-icon' alt='icon' src={'/images/seach_icon.png'} /> </button>
                         </div>
                     </div>
 
                     <div id='nav-buttons' className='nav-btn-container'>
-                        <Link to="/signin"  >
-                            <button className='nav-btn' onClick={() => setChange(!change)}> Sign In </button>
-                        </Link>
+                        {user.name ? (
+                            <div className='admin dropdown'>
+                                    <button className='nav-btn' onClick={() => setChange(!change)}> {user.name} <i className='fa fa-caret-down'> </i> </button>
+                                <ul className = 'admin-dc dropdown-content'>
+                                    <Link to = '#signout' onClick = { signoutHandler } > Sign Out </Link>
+                                </ul>
+                            </div>
+                        ) : (
+                            <Link to="/signin"  >
+                                <button className='nav-btn' onClick={() => setChange(!change)}> Sign In </button>
+                            </Link>
+                        )}
+
                         <Link to="/orders-returns"  >
                             <button className='nav-btn' onClick={() => setChange(!change)}> {returns}  </button>
                         </Link>
+
                         <Link to="/cart"  >
                             <button className='nav-btn' onClick={() => setChange(!change)}>
                                 Cart {totalItemsOrdered > 0 && <span className='badge'>{totalItemsOrdered}</span>}
@@ -102,10 +146,14 @@ const NavBarMini = () => {
                         </Link>
                     </div>
 
+
                 </div>
-            </div>
+            </nav>
+
         </div>
     );
 }
 
 export default NavBarMini;
+
+

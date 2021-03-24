@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-console.log('password: ',bcrypt.hashSync('1234', 8))
+import { v4 as uuidv4 } from 'uuid';
 const data = {
 
     users: [
@@ -7,19 +7,21 @@ const data = {
             name: 'admin',
             email: 'admin@example.com',
             password: bcrypt.hashSync('1234', 8),
-            isAdmin: true
+            isAdmin: true,
+            address: '123 Blue St. Temecula, Ca 92592'
         },
         {
             name: 'user',
             email: 'user@example.com',
             password: bcrypt.hashSync('1234', 8),
-            isAdmin: false
+            isAdmin: false,
+            address: '123 Red St. Temecula, Ca 92592'
         }
     ],
     products: [
         {
-            _id: '1',
-            name: 'Nike Slim Shirt',
+            _id: uuidv4(),
+            name: 'Nike Slim Shirt 1',
             category: 'Shirts',
             image: ['/images/p1.jpg', '/images/p1.jpg', '/images/p1.jpg'],
             price: 120,
@@ -30,8 +32,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '2',
-            name: 'Adidas Fit Shirt',
+            _id: uuidv4(),
+            name: 'Adidas Fit Shirt 1',
             category: 'Shirts',
             image: ['/images/p2.jpg', '/images/p2.jpg', '/images/p2.jpg'],
             price: 100,
@@ -42,8 +44,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '3',
-            name: 'Lacoste Free Shirt',
+            _id: uuidv4(),
+            name: 'Lacoste Free Shirt 1',
             category: 'Shirts',
             image: ['/images/p3.jpg', '/images/p3.jpg', '/images/p3.jpg'],
             price: 220,
@@ -54,8 +56,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '4',
-            name: 'Nike Slim Pant',
+            _id: uuidv4(),
+            name: 'Nike Slim Pant 1',
             category: 'Pants',
             image: ['/images/p4.jpg', '/images/p4.jpg', '/images/p4.jpg'],
             price: 78,
@@ -66,8 +68,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '5',
-            name: 'Puma Slim Pant',
+            _id: uuidv4(),
+            name: 'Puma Slim Pant 1',
             category: 'Pants',
             image: ['/images/p5.jpg', '/images/p5.jpg', '/images/p5.jpg'],
             price: 65,
@@ -78,8 +80,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '6',
-            name: 'Adidas Fit Pant',
+            _id: uuidv4(),
+            name: 'Adidas Fit Pant 1',
             category: 'Pants',
             image: ['/images/p6.jpg', '/images/p6.jpg', '/images/p6.jpg'],
             price: 139,
@@ -90,8 +92,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '7',
-            name: 'Nike Slim Shirt',
+            _id: uuidv4(),
+            name: 'Nike Slim Shirt 2',
             category: 'Shirts',
             image: ['/images/p1.jpg', '/images/p1.jpg', '/images/p1.jpg'],
             price: 120,
@@ -102,8 +104,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '8',
-            name: 'Adidas Fit Shirt',
+            _id: uuidv4(),
+            name: 'Adidas Fit Shirt 2',
             category: 'Shirts',
             image: ['/images/p2.jpg', '/images/p2.jpg', '/images/p2.jpg'],
             price: 100,
@@ -114,8 +116,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '9',
-            name: 'Lacoste Free Shirt',
+            _id: uuidv4(),
+            name: 'Lacoste Free Shirt 2',
             category: 'Shirts',
             image: ['/images/p3.jpg', '/images/p3.jpg', '/images/p3.jpg'],
             price: 220,
@@ -126,8 +128,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '10',
-            name: 'Nike Slim Pant',
+            _id: uuidv4(),
+            name: 'Nike Slim Pant 2',
             category: 'Pants',
             image: ['/images/p4.jpg', '/images/p4.jpg', '/images/p4.jpg'],
             price: 78,
@@ -138,8 +140,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '11',
-            name: 'Puma Slim Pant',
+            _id: uuidv4(),
+            name: 'Puma Slim Pant 2',
             category: 'Pants',
             image: ['/images/p5.jpg', '/images/p5.jpg', '/images/p5.jpg'],
             price: 65,
@@ -150,8 +152,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '12',
-            name: 'Adidas Fit Pant',
+            _id: uuidv4(),
+            name: 'Adidas Fit Pant 2',
             category: 'Pants',
             image: ['/images/p6.jpg', '/images/p6.jpg', '/images/p6.jpg'],
             price: 139,
@@ -162,8 +164,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '13',
-            name: 'Nike Slim Shirt',
+            _id: uuidv4(),
+            name: 'Nike Slim Shirt 3',
             category: 'Shirts',
             image: ['/images/p1.jpg', '/images/p1.jpg', '/images/p1.jpg'],
             price: 120,
@@ -174,8 +176,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '14',
-            name: 'Adidas Fit Shirt',
+            _id: uuidv4(),
+            name: 'Adidas Fit Shirt 3',
             category: 'Shirts',
             image: ['/images/p2.jpg', '/images/p2.jpg', '/images/p2.jpg'],
             price: 100,
@@ -186,8 +188,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '15',
-            name: 'Lacoste Free Shirt',
+            _id: uuidv4(),
+            name: 'Lacoste Free Shirt 3',
             category: 'Shirts',
             image: ['/images/p3.jpg', '/images/p3.jpg', '/images/p3.jpg'],
             price: 220,
@@ -198,8 +200,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '16',
-            name: 'Nike Slim Pant',
+            _id: uuidv4(),
+            name: 'Nike Slim Pant 3',
             category: 'Pants',
             image: ['/images/p4.jpg', '/images/p4.jpg', '/images/p4.jpg'],
             price: 78,
@@ -210,8 +212,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '17',
-            name: 'Puma Slim Pant',
+            _id: uuidv4(),
+            name: 'Puma Slim Pant 3',
             category: 'Pants',
             image: ['/images/p5.jpg', '/images/p5.jpg', '/images/p5.jpg'],
             price: 65,
@@ -222,8 +224,8 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id: '18',
-            name: 'Adidas Fit Pant',
+            _id: uuidv4(),
+            name: 'Adidas Fit Pant 3',
             category: 'Pants',
             image: ['/images/p6.jpg', '/images/p6.jpg', '/images/p6.jpg'],
             price: 139,

@@ -1,7 +1,12 @@
+
+
 .logo-header {
     display: flex;
     justify-content: center;
-    padding-top: 20px;
+    padding-top: 70px;
+}
+.logo {
+    width: 90%;
 }
 
 .nav-btn-header {
@@ -22,14 +27,30 @@
 }
 
 #home {
-    grid-area: "home";
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #ship-to {
-    grid-area: "ship-to";
+    width: 10%;
+    display: block;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: #e6ffee;
 }
 #search {
-    grid-area: "search";
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 #siteAds {
     grid-area: "nav-buttons";
@@ -39,23 +60,37 @@
 }
 
 .nav-btn {
-    background-color: #e6ffee;
+    display: flex;
+    justify-content: center;
+    width: 58px;
+    align-items: center;
 }
 
 .nav-container {
     border-bottom: 5px solid black;
     background-color: #3e8e41;
-    background-image: linear-gradient(to bottom right, #ccffdd, #3e8e41);
+   // background-image: linear-gradient(to bottom right, #ccffdd, #3e8e41);
+   // background: url('../../images/red-background-painting.jpg');
     position: relative;
     z-index: 5;
+    // -webkit-background-size: center;
+    // -moz-background-size: center;
+    // -o-background-size: center;
+    background-size: 100% 150%;
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    overflow: hidden;
+    
+}
+
+.background-mask {
+    background-color: rgba(187, 23, 23, 0.3);
+    height: 100%;
+    width: 100%;
 }
 
 .deliver-to {
-    display: block;
-    background-color: #e6ffee;
-    width: 95%;
-    height: 84%;
-    padding-left: 5%;
     h1 {
         font-size: x-small;
         padding: 0;
@@ -87,6 +122,10 @@
     z-index: 1;
 }
 
+.admin-dc {
+    margin-top: 50px;
+}
+
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
@@ -112,10 +151,8 @@
 }
 
 .search-bar {
-    width: 90%;
     margin-left: auto;
     margin-right: auto;
-    display: inline-flex;
     input {
         width: 90%;
         height: 34px;
@@ -130,7 +167,6 @@
 }
 
 .nav-btn-container {
-    height: 40px;
     display: flex;
     justify-content: center;
     button {
@@ -155,4 +191,139 @@
     position: fixed;
     top: 0;
     width: 100%;
+}
+
+#hamnav {
+    width: 100%;
+    background: #004d1a;
+    /* Optional */
+    position: sticky;
+    top: 0;
+}
+
+/* Hide these elements when screen is large */
+#hamnav label,
+#hamburger,
+.hamburger-dropdown,
+.small-screen-nav {
+    display: none;
+}
+
+/* Horizontal Menu Items */
+#hamitems {
+    display: flex;
+}
+#hamitems a {
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+#hamitems a:hover {
+    background: #3e8e41;
+}
+
+/* [ON SMALL SCREENS] */
+@media screen and (max-width: 768px) {
+    /* Show Hamburger Icon */
+    #hamnav label {
+        display: inline-flex;
+        color: white;
+        background: #3e8e41;
+        font-style: normal;
+        font-size: 1.2em;
+        padding: 10px;
+    }
+
+    .burger-dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+    
+    .burger-dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    
+    .burger-dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+    
+    input[type="checkbox"]#hamburger:hover  {
+        display: block;
+        height: 100hv;
+        width: 100vw;
+        background-color: red;
+    }
+    
+    .hamburger-dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+
+    
+    /* Break down menu items into vertical */
+    #hamitems a {
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        
+        border-top: 1px solid #333;
+    }
+
+    /* Toggle Show/Hide Menu */
+    #hamitems {
+        display: none;
+    }
+    #hamnav input:checked ~ #hamitems {
+        display: block;
+    }
+    // change search bar width to 85%
+    #mini-search {
+        width: 85%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .small-screen-nav {
+        display: inline-flex;
+        width: 100%;
+    }
+
+    .logo {
+        width: 50%;
+    }
+}
+
+/* [DOES NOT MATTER] */
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: arial, sans-serif;
+}
+
+
+
+@media screen and (min-width: 769px) {
+    #mini-search {
+        display: none;
+    }
+}
+
+.admin {
+    height: 50px;
+    width: 58px;
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
 }

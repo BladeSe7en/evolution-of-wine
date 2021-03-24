@@ -1,9 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-import NavBar from '../NavBar/NavBar';
-import Product from '../Product/Product';
+import React from 'react';
 import LoadingBox from '../LoadingBox/LoadingBox';
 import MessageBox from '../MessageBox/MessageBox';
-import { useDispatch, useSelector } from 'react-redux'
+import {  useSelector } from 'react-redux'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 
@@ -15,7 +13,6 @@ const ImageCarousel = (props) => {
     // const [error, setError] = useState(false);
     const { loading, error } = useSelector((state) => state.Home);
     const { productInfo } = useSelector((state) => state.ProductDetails);
-    const dispatch = useDispatch()
     
     return (
         <div className='ImageCarousel-container' >

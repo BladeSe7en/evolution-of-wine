@@ -1,7 +1,36 @@
-.details-container {
-    background-color: #e6ffee;
-    height: 100%;
+@mixin transform($property) {
+    -webkit-transform: $property;
+    -ms-transform: $property;
+    transform: $property;
 }
+
+.details-container .logo-header {
+	//background: linear-gradient(to right, #50bcf3 , #60ec94);
+    //background: linear-gradient(226deg, #108969, #d6eee8);
+    background-size: 400% 400%;
+
+    -webkit-animation: AnimationName 10s ease infinite;
+    -moz-animation: AnimationName 10s ease infinite;
+    animation: AnimationName 10s ease infinite;
+	overflow: hidden;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:87% 0%}
+    50%{background-position:14% 100%}
+    100%{background-position:87% 0%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:87% 0%}
+    50%{background-position:14% 100%}
+    100%{background-position:87% 0%}
+}
+@keyframes AnimationName {
+    0%{background-position:87% 0%}
+    50%{background-position:14% 100%}
+    100%{background-position:87% 0%}
+}
+
 
 
 button {

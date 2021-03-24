@@ -1,10 +1,12 @@
-import { combineReducers }     from 'redux';
-import HomeReducer from './Components/Home/HomeReducer';
-import SignInReducer from './Components/SignIn/SignInReducer';
+import { combineReducers }   from 'redux';
+import HomeReducer           from './Components/Home/HomeReducer';
+import SignInReducer         from './Components/SignIn/SignInReducer';
 import ProductDetailsReducer from './Components/ProductDetails/ProductDetailsReducer';
-import CartReducer from './Components/Cart/CartReducer';
-import NavBarMiniReducer from './Components/NavBarMini/NavBarMiniReducer';
-import OrdersReturnsReducer from './Components/OrdersReturns/OrdersReturnsReducer';
+import CartReducer           from './Components/Cart/CartReducer';
+import NavBarMiniReducer     from './Components/NavBarMini/NavBarMiniReducer';
+import OrdersReturnsReducer  from './Components/OrdersReturns/OrdersReturnsReducer';
+import RegisterScreenReducer from './Components/RegisterScreen/RegisterScreenReducer';
+
 
 
 const rootReducer = combineReducers({
@@ -13,7 +15,8 @@ const rootReducer = combineReducers({
     ProductDetails : ProductDetailsReducer,
     Cart           : CartReducer,
     NavBarMini     : NavBarMiniReducer,
-    OrdersReturns  : OrdersReturnsReducer
+    OrdersReturns  : OrdersReturnsReducer,
+    RegisterScreen : RegisterScreenReducer
 });
 
 export default rootReducer; 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import data from '../../data'
+//import { Link } from 'react-router-dom';
+//import data from '../../data'
 import { addToCart } from '../Cart/CartActions';
 import ImageCarousel from '../ImageCarousel/ImageCarousel';
 import LoadingBox from '../LoadingBox/LoadingBox';
@@ -19,7 +19,7 @@ export default function ProductDetails(props) {
 
     useEffect(() => {
         dispatch(getProductDetails(productId))
-    }, [dispatch]);
+    }, [dispatch, productId]);
 
     const addToCartHandler = () => {
         addToCart(productId, qty)

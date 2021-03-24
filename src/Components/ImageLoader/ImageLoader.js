@@ -1,27 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from 'react-router-dom';
-import NavBarMini from '../NavBarMini/NavBarMini';
+import React from 'react';
 
 const _loaded = {};
-
-// const ImageLoader = () => {
-//     const [ loaded, setLoaded ] = setState()
-
-
-//     return (
-//         <div className='nav-container'>
-//             <div className='logo-header'>
-//                 <img src={'/images/Evolution-of-Wine-Logo1.png'} className="logo" alt="logo" />
-//             </div>
-//             <NavBarMini />
-//         </div>
-//     );
-// }
-
-// export default ImageLoader;
-
-
 
 class ImageLoader extends React.Component {
     
@@ -29,11 +8,7 @@ class ImageLoader extends React.Component {
     state = {
         loaded: _loaded[this.props.src]
     };
-    componentDidMount() {
-
-        console.log('this.props.src: ',this.props.src)
-    }
-
+  
     //define our loading and loaded image classes
     static defaultProps = {
         className: "",
@@ -50,7 +25,7 @@ class ImageLoader extends React.Component {
 
     render() {
 
-        let { className, loadedClassName, loadingClassName, ...props } = this.props;
+        let { className, loadedClassName, loadingClassName } = this.props;
 
         className = `${className} ${this.state.loaded
             ? loadedClassName
@@ -60,7 +35,8 @@ class ImageLoader extends React.Component {
             src={this.props.src}
             onClick={this.props.onClick}
             className={className}
-            onLoad={this.onLoad} />;
+            onLoad={this.onLoad} 
+            alt = 'icon'/>;
     }
 }
 

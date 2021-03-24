@@ -4,7 +4,7 @@ const initialstate = {
     error       : ''
 }
 
-export default function HomeReducer(state = initialstate, action) {
+const HomeReducer = (state = initialstate, action) => {
 	const { payload, type } = action;
 
 	switch (type) {
@@ -34,3 +34,5 @@ export default function HomeReducer(state = initialstate, action) {
         
 	}
 }
+
+export default HomeReducer

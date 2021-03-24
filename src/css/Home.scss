@@ -11,7 +11,7 @@
     opacity: 0;
     width: 100%;
     height: auto;
-   // z-index: -1;
+    // z-index: -1;
 }
 .img-loaded {
     animation: fadeInImg cubic-bezier(0.23, 1, 0.32, 1) 1;
@@ -20,10 +20,8 @@
     animation-fill-mode: forwards;
     animation-duration: 1s;
     animation-delay: 0.3s;
-   // z-index: -1;
+    // z-index: -1;
 }
-
-
 
 .home-container {
     background-color: #e6ffee;
@@ -229,7 +227,6 @@ img.large {
     text-align: center;
 }
 
-
 #item-icon {
     grid-area: "item-icon";
 }
@@ -257,7 +254,6 @@ img.large {
     margin-top: 50px;
 }
 
-
 .is-visible {
     z-index: -1;
 }
@@ -274,3 +270,20 @@ img.large {
     margin: 50px;
 }
 
+/* Form */
+.form {
+    max-width: 60rem;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+}
+.form > div {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+.form label {
+    margin: 1rem 0;
+    display: block;
+}

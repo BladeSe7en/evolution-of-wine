@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from 'react-router-dom';
+import React from 'react';
+import HomeBio from '../HomeBio/HomeBio';
 import NavBarMini from '../NavBarMini/NavBarMini';
 
 
@@ -8,11 +7,14 @@ const NavBar = () => {
 
 
     return (
-        <div className='nav-container'>
-            <div className='logo-header'>
-                <img src={'/images/Evolution-of-Wine-Logo1.png'} className="logo" alt="logo" />
-            </div>
+        <div className='nav-container' style = {{backgroundImage: `url('/images/red-background-painting.jpg')`}}>
+            <div className = 'background-mask'>
             <NavBarMini />
+            <div className='logo-header' >
+                <img src={'/images/EvolutionOfWineLogoWhite.png'} className="logo" alt="logo" />
+            </div>
+            <HomeBio />
+            </div>
         </div>
     );
 }
