@@ -20,34 +20,29 @@ const SignInReducer = (state = initialstate, action) => {
 				user: payload
 			}
 		}
-		case 'USER_SIGNIN_PENDING':
-			return {
-				...state,
-				loading: true
-			};
+	
 
 		case 'USER_SIGNIN_FULFILLED':
 			localStorage.setItem('userInfo', JSON.stringify(payload));
 			return {
 				...state,
-				loading: false,
 				user: payload
-			};
-
-		case 'USER_SIGNIN_REJECTED':
-			console.log('state in signin: ', state)
-			return {
-				...state,
-				loading: false,
-				error: payload
 			};
 
 		case 'USER_SIGNOUT':
 			localStorage.removeItem('userInfo');
 			localStorage.removeItem('cartItems');
+			localStorage.removeItem('shippingAddress');
 			return {
 				...state,
-				user: initialstate.user
+				user: {
+					_id: null,
+					name: null,
+					email: null,
+					isAdmin: false,
+					token: null,
+					address: null
+				}
 			};
 
 		default: {

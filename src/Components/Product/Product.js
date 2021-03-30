@@ -10,7 +10,7 @@ export default function Product(props) {
         <div key={product._id} className="card">
             <Link to={`/product/${product._id}`}>
                 <LazyLoad >
-                    <ImageLoader className="medium" src={product.image[0]} alt={product.name} />
+                    <ImageLoader className="medium" src={ product.image[0] } alt={product.name} />
                 </LazyLoad>
             </Link>
             <div className="card-body">

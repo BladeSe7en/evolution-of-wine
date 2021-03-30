@@ -4,6 +4,7 @@ import path from 'path';
 import userRouter from './routers/userRouter.js';
 import dotenv from 'dotenv'
 import productRouter from './routers/productRouter.js';
+import orderRouter from './routers/orderRouter.js';
 dotenv.config()
 
 
@@ -22,13 +23,20 @@ app.use(express.static(`${__dirname}/build`));
 
 
 app.use('/api/users', userRouter);
-app.use('/api/products', productRouter)
+app.use('/api/products', productRouter);
+app.use('/api/orders', orderRouter);
 app.get('/', (req, res) => {
     res.send('Server is ready');
 });
 
 app.use((err, req, res, next) => {
     res.status(500).send({ message: err.message });
+});
+
+const connection = mongoose.connection;
+
+connection.once("open", function() {
+    console.log("MongoDB database connection established successfully");
 });
 
 

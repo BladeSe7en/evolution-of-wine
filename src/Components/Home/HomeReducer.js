@@ -1,7 +1,8 @@
 const initialstate = {
     loading     : false,
     products    : [],
-    error       : ''
+    error       : '',
+	orders      : []
 }
 
 const HomeReducer = (state = initialstate, action) => {
@@ -28,6 +29,48 @@ const HomeReducer = (state = initialstate, action) => {
                 error: payload.message
 			}
         }
+
+		case 'USER_SIGNIN_PENDING':
+			return {
+				...state,
+				loading: true
+			};
+
+			case 'USER_SIGNIN_FULFILLED':
+			return {
+				...state,
+				loading: false
+			};
+
+			case 'USER_SIGNIN_REJECTED':
+			console.log('state in signin: ', state)
+			return {
+				...state,
+				loading: false,
+				error: payload
+			};
+
+			case 'CREATE_ORDER_PENDING':
+			return {
+				...state,
+				loading: true
+			};
+
+			case 'CREATE_ORDER_FULFILLED':
+			return {
+				...state,
+				loading: false
+			};
+
+			case 'GET_ORDERS_FULFILLED': {
+				return {
+					...state,
+					
+					orders: payload
+				}
+			}
+
+
 		default: {
 			return state
         }

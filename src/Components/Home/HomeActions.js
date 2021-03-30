@@ -9,3 +9,16 @@ import axios from 'axios';
                     })
             }
         }
+
+        export const getOrders = () => {
+            console.log('-1-')
+            return {
+                type: 'GET_ORDERS',
+                payload: axios.get('/api/orders/get')
+                    .then(response => {
+                        console.log('-2-')
+                        return response.data
+                    })
+            }
+        }
+

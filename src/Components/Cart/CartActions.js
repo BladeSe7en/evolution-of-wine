@@ -15,7 +15,7 @@ export const addToCart = (productId, qty) => {
         type: 'ADD_TO_CART',
         payload: axios.get(`/api/products/${productId}`)
             .then(response => {
-                let product = Object.assign( {}, response.data, { qty: +qty } )
+                let product = Object.assign({}, response.data, { qty: +qty })
                 return product
             })
     }
@@ -30,7 +30,7 @@ export const updateTotalCartItems = (total) => {
     }
 }
 
-export const removeFromCart = (productId) => { 
+export const removeFromCart = (productId) => {
     return {
         type: 'REMOVE_FROM_CART',
         payload: {
@@ -39,6 +39,38 @@ export const removeFromCart = (productId) => {
     }
 }
 
+export const saveShippingAddress = (data) => {
+    return {
+        type: 'CART_SAVE_SHIPPING_ADDRESS',
+        payload: {
+            shippingAddress: data
+        }
+    }
+};
 
+export const savePaymentMethod = (data) => {
+    return {
+        type: 'CART_SAVE_PAYMENT_METHOD',
+        payload: {
+            paymentMethod: data
+        }
+    }
+};
 
-
+export const detailsOrder = (orderId, token) => {
+    return {
+        type: 'CREATE_ORDER',
+        payload: axios({
+            method: 'get',
+            url: `/api/orders/${orderId}`,
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => {
+                console.log('this is response.data inside detailsOrder action: ', response.data)
+                return response.data
+            })
+    }
+};

@@ -4,7 +4,7 @@ import Product from '../Product/Product';
 import LoadingBox from '../LoadingBox/LoadingBox';
 import MessageBox from '../MessageBox/MessageBox';
 import { useDispatch, useSelector } from 'react-redux'
-import { listProducts } from './HomeActions';
+import { getOrders, listProducts } from './HomeActions';
 import bcrypt from 'bcryptjs';
 
 
@@ -13,7 +13,7 @@ const Home = (props) => {
     // const [products, setProducts] = useState([]);
     // const [loading, setLoading] = useState(false);
     // const [error, setError] = useState(false);
-    const { loading, products, error } = useSelector((state) => state.Home);
+    const { loading, products, error, orders } = useSelector((state) => state.Home);
     const dispatch = useDispatch()
     const {Cart, Home, NavBarMini, SignIn} = useSelector(state => state)
     
@@ -24,25 +24,38 @@ const Home = (props) => {
 
 console.log('password: ',bcrypt.hashSync('1234', 8))
         dispatch(listProducts())
+        dispatch(getOrders())
     }, [dispatch]);
 
 
 
     return (
         <div className='home-container' >
+            <div className='cart-container' style={{ backgroundImage: `url('/images/wine-barrel-3.jpeg')` }}>
+                <div className='sudo-background-black'>
+                <div className='sudo-background-white'>
             <NavBar />
             
             <div>
                 
                 {loading ? (<LoadingBox></LoadingBox>) : error ? (<MessageBox variant='danger' >{error} </MessageBox>) : (
                     <div className='row center'>
-                        { products.map((product) => (
+                        {console.log('this is products in state: ',products)}
+                        { products[0] && products.map((product) => (
                             <Product key={product._id} product={product}></Product>
                         ))}
+                        
+                        {/* { orders.map((product) => (
+                            <Product key={product._id} product={product}></Product>
+                        ))} */}
+                    
                     </div>
+                    
                 )}
-                <footer className='row center'>All rights reserved</footer>
             </div>
+        </div>
+        </div>
+        </div>
         </div>
     );
 }

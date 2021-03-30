@@ -64,6 +64,8 @@
     justify-content: center;
     width: 58px;
     align-items: center;
+    background-color: #660022;
+    color: white;
 }
 
 .nav-container {
@@ -111,12 +113,13 @@
     position: relative;
     display: inline-block;
     width: 50px;
+    background-color: #660022;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #660022;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -134,7 +137,7 @@
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1;
+    background-color: #990033;
 }
 
 .dropdown:hover .dropdown-content {
@@ -142,7 +145,7 @@
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+    background-color: #990033;  // light red
 }
 
 // search bar
@@ -158,7 +161,7 @@
         height: 34px;
     }
     button {
-        background-color: #4caf50;
+        background-color: #660022; // dark red
         color: white;
         font-size: 16px;
         border: none;
@@ -191,11 +194,13 @@
     position: fixed;
     top: 0;
     width: 100%;
+    background-color: rgb(0, 0, 0);
+    height:auto;
 }
 
 #hamnav {
     width: 100%;
-    background: #004d1a;
+    border-bottom: 5px solid black;
     /* Optional */
     position: sticky;
     top: 0;
@@ -220,8 +225,13 @@
     text-align: center;
 }
 #hamitems a:hover {
-    background: #3e8e41;
+    background: #cc0044;
 }
+
+.nav-btn-container a:hover  {
+    background: #cc0044;
+}
+
 
 /* [ON SMALL SCREENS] */
 @media screen and (max-width: 768px) {
@@ -252,7 +262,7 @@
     }
     
     .burger-dropdown-content a:hover {
-        background-color: #f1f1f1;
+        background-color: #990033;
     }
     
     input[type="checkbox"]#hamburger:hover  {
@@ -263,7 +273,7 @@
     }
     
     .hamburger-dropdown:hover .dropbtn {
-        background-color: #3e8e41;
+        background-color: #f0c040;
     }
 
     

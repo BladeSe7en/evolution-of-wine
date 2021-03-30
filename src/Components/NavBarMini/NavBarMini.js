@@ -9,7 +9,7 @@ const NavBarMini = () => {
     const [change, setChange] = useState(true);
     let returns = 'Returns & Orders'
     const { user } = useSelector(state => state.SignIn);
-    const { cartItems, totalItemsOrdered } = useSelector(state => state.Cart);
+    const { cartItems, totalItemsOrdered, shippingAddress } = useSelector(state => state.Cart);
     const dispatch = useDispatch();
 
     const [sticky, setSticky] = useState({ isSticky: false, offset: 0 });
@@ -67,7 +67,7 @@ const NavBarMini = () => {
 
     return (
         <div className={`sticky-wrapper${sticky.isSticky ? ' sticky' : ''}`} ref={headerRef}>
-            <nav id="hamnav">
+            <nav id="hamnav"  >
                 <div className='small-screen-nav'>
 
                     <label htmlfor="hamburger">&#9776;</label>
@@ -91,7 +91,7 @@ const NavBarMini = () => {
                         </div>
                         <input></input>
                         <div>
-                            <button className='nav-btn' onClick={() => setChange(!change)}> <img className='search-icon' src={'/images/seach_icon.png'} alt="logo" /> </button>
+                            <button className='nav-btn' onClick={() => setChange(!change)}> <img className='search-icon' src={'/images/white-seach-icon.png'} alt="logo" /> </button>
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ const NavBarMini = () => {
 
                     <div id='ship-to' className='deliver-to'>
                         <h1>Deliver to:</h1>
-                        <h1>{user.address}</h1>
+                        <h1>{shippingAddress.address ? shippingAddress.address : ''}</h1>
                     </div>
 
                     <div id='search' className='search-bar'>
@@ -117,7 +117,7 @@ const NavBarMini = () => {
                         </div>
                         <input></input>
                         <div>
-                            <button className='nav-btn' onClick={() => setChange(!change)}> <img className='search-icon' alt='icon' src={'/images/seach_icon.png'} /> </button>
+                            <button className='nav-btn' onClick={() => setChange(!change)}> <img className='search-icon' alt='icon' src={'/images/white-seach-icon.png'} /> </button>
                         </div>
                     </div>
 
@@ -126,7 +126,7 @@ const NavBarMini = () => {
                             <div className='admin dropdown'>
                                     <button className='nav-btn' onClick={() => setChange(!change)}> {user.name} <i className='fa fa-caret-down'> </i> </button>
                                 <ul className = 'admin-dc dropdown-content'>
-                                    <Link to = '#signout' onClick = { signoutHandler } > Sign Out </Link>
+                                    <Link to = '/' onClick = { signoutHandler } > Sign Out </Link>
                                 </ul>
                             </div>
                         ) : (

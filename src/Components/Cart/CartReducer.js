@@ -2,7 +2,15 @@
 const initialstate = {
     cartItems         : localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [],
     qty               : 0,
-    totalItemsOrdered : 0
+    totalItemsOrdered : 0,
+    shippingAddress   :  localStorage.getItem('shippingAddress') ? JSON.parse(localStorage.getItem('shippingAddress')).shippingAddress : {
+        fullName      : '',
+        address       : '',
+        city          : '',
+        postalCode    : '',
+        country       : ''
+    },
+    seccess           : false
 }
 
 export default function CartReducer(state = initialstate, action) {
@@ -67,6 +75,39 @@ export default function CartReducer(state = initialstate, action) {
             cartItems: state.cartItems.filter((x) => x._id !== payload.productId)
             }
         }
+
+        case 'CART_SAVE_SHIPPING_ADDRESS': {
+            localStorage.setItem('shippingAddress', JSON.stringify(payload));
+            return {
+                ...state,
+                ...payload
+            }
+        }
+
+        case 'CART_SAVE_PAYMENT_METHOD': {
+            return {
+                ...state,
+                ...payload
+            }
+        }
+
+        case 'CREATE_ORDER_FULFILLED':
+            localStorage.removeItem('cartItems');
+			return {
+				...state,
+				cartItems: [],
+                success: true
+			};
+
+            case 'ORDER_RESET_FULFILLED':
+            localStorage.removeItem('cartItems');
+			return {
+				...state,
+				cartItems: [],
+                success: true
+			};
+
+            
 
 
         default: {

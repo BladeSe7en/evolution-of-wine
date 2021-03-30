@@ -1,20 +1,17 @@
 const initialstate = {
-	user: {
-        userName: null,
-        address: '123 Blue St'
-    }
+	order: {}
 }
 
 export default function OrdersReducersReducer(state = initialstate, action) {
 	const { payload, type } = action;
 
 	switch (type) {
-		case 'UPDATE_USER': {
+		case 'CREATE_ORDER_FULFILLED':
 			return {
 				...state,
-				user: payload
+				order: payload
 			}
-		}
+		
 
 		default: {
 			return state

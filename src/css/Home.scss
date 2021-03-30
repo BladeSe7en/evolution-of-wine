@@ -32,10 +32,10 @@
 }
 
 .cart-container {
-    background-color: #e6ffee;
+    background-color: white;
     height: 100%;
     li:nth-child(even) {
-        background: #b2e0b3;
+        background: rgb(245, 245, 242);
     }
 }
 
@@ -140,14 +140,27 @@ a.brand {
 }
 .col-1 {
     flex: 1 1 25rem;
-    padding-right: 60px;
-    margin: auto;
+    padding-right: auto;
+    padding-left:auto;
+    margin-left: auto;
+    margin-right: 15%;
 }
 .col-2 {
     flex: 2 1 50rem;
     justify-content: center;
     display: flex;
-    margin: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: auto;
+    padding-left:auto;
+    background-color: white;
+    button {
+        background-color: #660022; // dark red
+        color: white;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
 }
 
 .min-30 {
@@ -233,9 +246,16 @@ img.large {
 
 #item-name {
     grid-area: "item-name";
+    a {
+        color: black;
+    }
 }
 #item-quantity-selector {
     grid-area: "item-quantity-selector";
+    text-decoration: none;
+    a {
+        color: black;
+    }
 }
 #item-price {
     grid-area: "item-price";
@@ -245,7 +265,7 @@ img.large {
 }
 
 .border {
-    border: 3px solid #004d1a;
+    border: 3px solid #660022;
     list-style-type: none;
     width: 100%;
 }
@@ -285,5 +305,43 @@ img.large {
 }
 .form label {
     margin: 1rem 0;
-    display: block;
+}
+.sudo-background-black {
+    background-color: rgba(255, 255, 255, 0.7);
+    height: 100%;
+    width: 100%;
+}
+
+// .sudo-background-white {
+//     background-color: rgba(102, 0, 34, 0.3);
+//     height: 100%;
+//     width: 100%;
+// }
+
+/* Checkout Steps */
+.checkout-steps > div {
+    border-top: 0.3rem #c0c0c0 solid;
+    color: #c0c0c0;
+    flex: 1;
+    padding: 1rem;
+    font-weight: bold;
+}
+.checkout-steps > div.active {
+    border-top-color: #f08000;
+    color: #f08000;
+}
+
+
+.checkout-height {
+    height: 20vh;
+}
+
+.add-margin {
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 50px;
+}
+
+.add-width {
+    width: 80%;
 }
