@@ -9,7 +9,7 @@ export default function OrdersReducersReducer(state = initialstate, action) {
 		case 'CREATE_ORDER_FULFILLED':
 			return {
 				...state,
-				order: payload
+				order: payload.order
 			}
 		
 

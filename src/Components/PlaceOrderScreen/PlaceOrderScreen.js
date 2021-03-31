@@ -40,17 +40,17 @@ let newOrder = {
     totalPrice
 }
     const placeOrderHandler = () => {
-        console.log('this is order in jsx: ',newOrder)
+        console.log('this is order in jsx: ',newOrder.user.token)
         dispatch(createOrder( newOrder ));
 
     };
 
     useEffect(() => {
         if (success) {
+            console.log('this is order._id in useeffect: ',order._id)
             props.history.push(`/order/${order._id}`)
-            dispatch(orderReset(newOrder))
         }
-    }, [dispatch, props.history, success, order, newOrder])
+    }, [dispatch, props.history, success])
 
     return (
         <div>

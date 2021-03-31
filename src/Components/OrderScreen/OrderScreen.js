@@ -10,9 +10,9 @@ export default function OrderScreen(props) {
     const { loading, error } = useSelector((state) => state.Home);
     const { user } = useSelector((state) => state.SignIn);
     const { order } = useSelector((state) => state.OrdersReturns);
-console.log('orderId: ',orderId)
     const dispatch = useDispatch();
     useEffect(() => {
+        console.log('orderId: ',orderId)
         dispatch(detailsOrder(orderId, user.token));
     }, [dispatch, orderId]);
     return loading ? (

@@ -58,8 +58,10 @@ export const savePaymentMethod = (data) => {
 };
 
 export const detailsOrder = (orderId, token) => {
+    console.log('this is orderId: ',orderId)
+    console.log('this is token: ',token)
     return {
-        type: 'CREATE_ORDER',
+        type: 'ORDER_DETAILS',
         payload: axios({
             method: 'get',
             url: `/api/orders/${orderId}`,
@@ -74,3 +76,23 @@ export const detailsOrder = (orderId, token) => {
             })
     }
 };
+
+
+// export const detailsOrder = (orderId) => async (dispatch, getState) => {
+//     dispatch({ type: ORDER_DETAILS_REQUEST, payload: orderId });
+//     const {
+//       userSignin: { userInfo },
+//     } = getState();
+//     try {
+//       const { data } = await Axios.get(`/api/orders/${orderId}`, {
+//         headers: { Authorization: `Bearer ${userInfo.token}` },
+//       });
+//       dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
+//     } catch (error) {
+//       const message =
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message;
+//       dispatch({ type: ORDER_DETAILS_FAIL, payload: message });
+//     }
+//   };
