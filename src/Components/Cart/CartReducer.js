@@ -10,7 +10,8 @@ const initialstate = {
         postalCode    : '',
         country       : ''
     },
-    seccess           : false
+    seccess           : false,
+    pendingOrder      : null
 }
 
 export default function CartReducer(state = initialstate, action) {
@@ -99,12 +100,13 @@ export default function CartReducer(state = initialstate, action) {
                 success: true
 			};
 
-            case 'ORDER_RESET_FULFILLED':
+            case 'ORDER_RESET':
             localStorage.removeItem('cartItems');
 			return {
 				...state,
 				cartItems: [],
-                success: true
+                success: true,
+                pendingOrder: payload
 			};
 
             
