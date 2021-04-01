@@ -18,6 +18,8 @@ export default function ShippingAddressScreen(props) {
         props.history.push('/signin');
     }
 
+   
+
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(

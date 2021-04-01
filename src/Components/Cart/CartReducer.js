@@ -11,7 +11,10 @@ const initialstate = {
         country       : ''
     },
     seccess           : false,
-    pendingOrder      : null
+    pendingOrder      : null,
+    seccessPay        : false,
+    errorPay          : null,
+    loadingPay        : false
 }
 
 export default function CartReducer(state = initialstate, action) {
@@ -109,7 +112,37 @@ export default function CartReducer(state = initialstate, action) {
                 pendingOrder: payload
 			};
 
-            
+            case 'ORDER_PAY_RESET':
+                return {
+                    ...state,
+                    success     : false,
+                    pendingOrder: null,
+                    seccessPay  : false,
+                    errorPay    : null,
+                    loadingPay  : false
+                };
+
+            case 'PAY_ORDER_PENDING': {
+                return {
+                    ...state,
+                    loading: true
+                }
+        }
+        case 'PAY_ORDER_FULFILLED': {
+            return {
+                ...state,
+                loading: false,
+                seccessPay: true
+            }
+        }
+    
+            case 'PAY_ORDER_REJECTED': {
+                return {
+                    ...state,
+                    loading: false,
+                    errorPay: payload.message
+                }
+            }
 
 
         default: {

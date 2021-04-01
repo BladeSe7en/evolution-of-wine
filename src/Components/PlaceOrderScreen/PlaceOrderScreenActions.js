@@ -31,4 +31,10 @@ export const orderReset = (order) => {
     }
 };
 
+export const orderPayReset = () => {
+    return {
+        type: 'ORDER_PAY_RESET',
+    }
+};
+
 

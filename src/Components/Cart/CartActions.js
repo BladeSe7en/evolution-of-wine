@@ -78,21 +78,25 @@ export const detailsOrder = (orderId, token) => {
 };
 
 
-// export const detailsOrder = (orderId) => async (dispatch, getState) => {
-//     dispatch({ type: ORDER_DETAILS_REQUEST, payload: orderId });
-//     const {
-//       userSignin: { userInfo },
-//     } = getState();
-//     try {
-//       const { data } = await Axios.get(`/api/orders/${orderId}`, {
-//         headers: { Authorization: `Bearer ${userInfo.token}` },
-//       });
-//       dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
-//     } catch (error) {
-//       const message =
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message;
-//       dispatch({ type: ORDER_DETAILS_FAIL, payload: message });
-//     }
-//   };
+export const payOrder = (order, paymentResult, token) => {
+    console.log('in payOrder action-- order: ',order)
+    console.log('in payOrder action-- paymentResult: ',paymentResult)
+    console.log('in payOrder action-- token: ',token)
+    return {
+        type: 'PAY_ORDER',
+        payload: axios({
+            method: 'put',
+            url: `/api/orders/${order._id}/pay`,
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            data: {
+                paymentResult
+            }
+        })
+            .then(response => {
+                return response.data
+            })
+    }
+};

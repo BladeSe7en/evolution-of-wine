@@ -70,6 +70,26 @@ const HomeReducer = (state = initialstate, action) => {
 				}
 			}
 
+			case 'ORDER_DETAILS_PENDING':
+			return {
+				...state,
+				loading: true
+			};
+
+			case 'ORDER_DETAILS_FULFILLED':
+			return {
+				...state,
+				loading: false
+			};
+
+			case 'ORDER_DETAILS_REJECTED':
+			console.log('state in signin: ', state)
+			return {
+				...state,
+				loading: false,
+				error: payload
+			};
+
 
 		default: {
 			return state

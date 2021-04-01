@@ -32,7 +32,7 @@ export default function CartScreen(props) {
 
 
     return (
-        <div className='cart-container' style={{ backgroundImage: `url('/images/wine-barrel-3.jpeg')` }}>
+        <div className='cart-container  background-image' style={{ backgroundImage: `url('/images/wine-barrel-3.jpeg')` }}>
                 <div className='sudo-background-black'>
                 <div className='sudo-background-white'>
                 <NavBarMini />

@@ -5,7 +5,7 @@ import { updateTotalCartItems } from '../Cart/CartActions';
 import { signout } from '../SignIn/SignInActions';
 
 
-const NavBarMini = () => {
+const NavBarMini = (props) => {
     const [change, setChange] = useState(true);
     let returns = 'Returns & Orders'
     const { user } = useSelector(state => state.SignIn);
@@ -45,6 +45,7 @@ const NavBarMini = () => {
 
     // add/remove scroll event listener for navbar scroll
     useEffect(() => {
+        console.log('props.match.path: ',props.match.path)
         console.log('window.location: ', window.location.pathname)
         var header = headerRef.current.getBoundingClientRect();
         console.log('header: ', header)
@@ -64,6 +65,13 @@ const NavBarMini = () => {
     const signoutHandler = () => {
         dispatch(signout())
     }
+
+
+    let homeIcon 
+    useEffect((props) => {
+        props.match.path === '/shipping' ? homeIcon = '/images/black-home-icon.png' : homeIcon = '/images/home-icon-white.png'
+        console.log('props.match.path: ',props.match.path)
+    },[props])
 
     return (
         <div className={`sticky-wrapper${sticky.isSticky ? ' sticky' : ''}`} ref={headerRef}>
@@ -98,7 +106,7 @@ const NavBarMini = () => {
 
                 <div id="hamitems">
                     <Link to="/" id='home' className='home-icon'>
-                        <img src={'/images/home-icon-white.png'} className="home-icon" alt="logo" />
+                        <img src={homeIcon} className="home-icon" alt="logo" />
                     </Link>
 
                     <div id='ship-to' className='deliver-to'>

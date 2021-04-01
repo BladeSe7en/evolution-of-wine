@@ -5,7 +5,7 @@ export default function CheckoutSteps(props) {
     return (
         <div className="row checkout-steps">
             <Link to="/" id='home' className='home-icon'>
-                <img src={'/images/home-icon-white.png'} className="home-icon" alt="logo" />
+                <img src={'/images/black-home-icon.png'} className="home-icon" alt="logo" />
             </Link>
             <div className={props.step1 ? 'active' : ''}>Sign-In</div>
             <div className={props.step2 ? 'active' : ''}>Shipping</div>
