@@ -45,7 +45,6 @@ const NavBarMini = (props) => {
 
     // add/remove scroll event listener for navbar scroll
     useEffect(() => {
-        console.log('props.match.path: ',props.match.path)
         console.log('window.location: ', window.location.pathname)
         var header = headerRef.current.getBoundingClientRect();
         console.log('header: ', header)
