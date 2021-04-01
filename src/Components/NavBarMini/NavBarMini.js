@@ -65,13 +65,7 @@ const NavBarMini = (props) => {
         dispatch(signout())
     }
 
-
-    let homeIcon 
-    useEffect((props) => {
-        props.match.path === '/shipping' ? homeIcon = '/images/black-home-icon.png' : homeIcon = '/images/home-icon-white.png'
-        console.log('props.match.path: ',props.match.path)
-    },[props])
-
+    
     return (
         <div className={`sticky-wrapper${sticky.isSticky ? ' sticky' : ''}`} ref={headerRef}>
             <nav id="hamnav"  >
@@ -105,7 +99,7 @@ const NavBarMini = (props) => {
 
                 <div id="hamitems">
                     <Link to="/" id='home' className='home-icon'>
-                        <img src={homeIcon} className="home-icon" alt="logo" />
+                        <img src={'/images/home-icon-white.png'} className="home-icon" alt="logo" />
                     </Link>
 
                     <div id='ship-to' className='deliver-to'>
