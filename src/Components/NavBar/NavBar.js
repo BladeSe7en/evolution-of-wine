@@ -11,7 +11,7 @@ const NavBar = () => {
             <div className = 'background-mask'>
             <NavBarMini />
             <div className='logo-header' >
-                <img src={'/images/EvolutionOfWineLogoWhite.png'} className="logo" alt="logo" />
+                <img src={'/images/EvolutionofWineLogoWhite.png'} className="logo" alt="logo" />
             </div>
             <HomeBio />
             </div>
