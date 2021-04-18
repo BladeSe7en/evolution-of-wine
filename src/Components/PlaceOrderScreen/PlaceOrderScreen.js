@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import CheckoutSteps from '../CheckoutSteps/CheckoutSteps'
 import LoadingBox from '../LoadingBox/LoadingBox';
 import MessageBox from '../MessageBox/MessageBox';
-import { createOrder, orderReset } from './PlaceOrderScreenActions';
+//import NavBarMini from '../NavBarMini/NavBarMini';
+import { createOrder } from './PlaceOrderScreenActions';
 
 export default function PlaceOrderScreen(props) {
     const { paymentMethod, cartItems, shippingAddress, success } = useSelector((state) => state.Cart);
@@ -50,7 +51,7 @@ let newOrder = {
             console.log('this is order._id in useeffect: ',order._id)
             props.history.push(`/order/${order._id}`)
         }
-    }, [dispatch, props.history, success])
+    }, [dispatch, props.history, order, success])
 
     return (
         <div>

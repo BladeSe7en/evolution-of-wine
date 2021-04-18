@@ -1,9 +1,21 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
-import { isAuth } from '../utils.js';
+import { isAdmin, isAuth } from '../utils.js';
 
 const orderRouter = express.Router();
+
+orderRouter.get(
+    '/all',
+    isAuth,
+    isAdmin,
+    asyncHandler(async (req, res) => {
+        const orders = await Order.find({}).populate('user', 'name');
+        res.send(orders);
+    })
+);
+
+
 
 orderRouter.post(
     '/',
@@ -25,10 +37,11 @@ orderRouter.post(
         // console.log('req.body.order.user_id:', req.body.order.user._id)
         // console.log('am I even getting here')
         if (req.body.order.cartItems.length === 0) {
+            console.log('111')
             res.status(400).send({ message: 'Cart is empty' });
         } else {
             let cartItems = req.body.order.cartItems.map(({_id, ...keepAttrs}) => keepAttrs)
-
+            console.log('222')
             const order = new Order({
                 cartItems: cartItems,
 
@@ -64,13 +77,17 @@ orderRouter.post(
         }
     }))
 
-    // orderRouter.get(
-    //     '/get',
-    //     asyncHandler(async (req, res) => {
-    //         const orders = await Order.find({});
-    //         res.send(orders);
-    //     })
-    // );
+    orderRouter.get(
+        '/getUserOrders',
+        isAuth,
+        asyncHandler(async (req, res) => {
+            console.log('req.body.token._id: ',req.body.token)
+            const orders = await Order.find({ user: req.body.token._id });
+            //const orders = await Order.find().select({ user: req.body.token._id });
+            console.log('found orders: ',orders)
+            res.send(orders);
+        })
+    );
 
 orderRouter.get(
     '/:id',
@@ -114,6 +131,39 @@ orderRouter.put(
             };
             const updatedOrder = await order.save();
             res.send({ message: 'Order Paid', order: updatedOrder });
+        } else {
+            res.status(404).send({ message: 'Order Not Found' });
+        }
+    })
+);
+
+orderRouter.put(
+    '/:id/deliver',
+    isAuth,
+    isAdmin,
+    asyncHandler(async (req, res) => {
+        const order = await Order.findById(req.params.id);
+        if (order) {
+            order.isDelivered = true;
+            order.deliveredAt = Date.now();
+
+            const updatedOrder = await order.save();
+            res.send({ message: 'Order Delivered', order: updatedOrder });
+        } else {
+            res.status(404).send({ message: 'Order Not Found' });
+        }
+    })
+);
+
+orderRouter.delete(
+    '/:id',
+    isAuth,
+    isAdmin,
+    asyncHandler(async (req, res) => {
+        const order = await Order.findById(req.params.id);
+        if (order) {
+            const deleteOrder = await order.remove();
+            res.send({ message: 'Order Deleted', order: deleteOrder });
         } else {
             res.status(404).send({ message: 'Order Not Found' });
         }

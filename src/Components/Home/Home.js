@@ -4,7 +4,7 @@ import Product from '../Product/Product';
 import LoadingBox from '../LoadingBox/LoadingBox';
 import MessageBox from '../MessageBox/MessageBox';
 import { useDispatch, useSelector } from 'react-redux'
-import { getOrders, listProducts } from './HomeActions';
+import { getImages, listProducts } from './HomeActions';
 import bcrypt from 'bcryptjs';
 
 
@@ -13,18 +13,14 @@ const Home = (props) => {
     // const [products, setProducts] = useState([]);
     // const [loading, setLoading] = useState(false);
     // const [error, setError] = useState(false);
-    const { loading, products, error, orders } = useSelector((state) => state.Home);
+    const { loading, products, error, images } = useSelector((state) => state.Home);
     const dispatch = useDispatch()
-    const {Cart, Home, NavBarMini, SignIn} = useSelector(state => state)
     
     
     useEffect(() => {
-        console.log('testing state: ',Cart, Home, NavBarMini, SignIn)
-        console.log('props: ',props.state)
-
 console.log('password: ',bcrypt.hashSync('1234', 8))
+        dispatch(getImages())
         dispatch(listProducts())
-        dispatch(getOrders())
     }, [dispatch]);
 
 
@@ -41,6 +37,9 @@ console.log('password: ',bcrypt.hashSync('1234', 8))
                 {loading ? (<LoadingBox></LoadingBox>) : error ? (<MessageBox variant='danger' >{error} </MessageBox>) : (
                     <div className='row center'>
                         {console.log('this is products in state: ',products)}
+                        { images[0] && images.map((image) => (
+                            console.log('mapped image: ',image)
+                        ))}
                         { products[0] && products.map((product) => (
                             <Product key={product._id} product={product}></Product>
                         ))}

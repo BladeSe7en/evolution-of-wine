@@ -123,18 +123,7 @@ const NavBarMini = (props) => {
                     </div>
 
                     <div id='nav-buttons' className='nav-btn-container'>
-                        {user.name ? (
-                            <div className='admin dropdown'>
-                                    <button className='nav-btn' onClick={() => setChange(!change)}> {user.name} <i className='fa fa-caret-down'> </i> </button>
-                                <ul className = 'admin-dc dropdown-content'>
-                                    <Link to = '/' onClick = { signoutHandler } > Sign Out </Link>
-                                </ul>
-                            </div>
-                        ) : (
-                            <Link to="/signin"  >
-                                <button className='nav-btn' onClick={() => setChange(!change)}> Sign In </button>
-                            </Link>
-                        )}
+                        
 
                         <Link to="/orders-returns"  >
                             <button className='nav-btn' onClick={() => setChange(!change)}> {returns}  </button>
@@ -145,6 +134,40 @@ const NavBarMini = (props) => {
                                 Cart {totalItemsOrdered > 0 && <span className='badge'>{totalItemsOrdered}</span>}
                             </button>
                         </Link>
+
+                        {user.name ? (
+                            <div className='admin dropdown'>
+                                    <button className='nav-btn' onClick={() => setChange(!change)}> {user.name} <i className='fa fa-caret-down'> </i> </button>
+                                <ul className = 'admin-dc dropdown-content'>
+                                    <Link to = '/userProfile' > User Profile </Link>
+                                    <Link to = '/' onClick = { signoutHandler } > Sign Out </Link>
+                                </ul>
+                            </div>
+                        ) : (
+                            <Link to="/signin"  >
+                                <button className='nav-btn' onClick={() => setChange(!change)}> Sign In </button>
+                            </Link>
+                        )}
+
+                        {user && user.isAdmin && (
+                            <div className="admin dropdown">
+                                    <button className='nav-btn' > Admin <i className="fa fa-caret-down"></i>  </button>
+                                <div className="admin-dc2 dropdown-content">
+                                    <div>
+                                        <Link to="/dashboard">Dashboard</Link>
+                                    </div>
+                                    <div>
+                                        <Link to="/productlist">Products</Link>
+                                    </div>
+                                    <div>
+                                        <Link to="/adminOrderList">All Orders</Link>
+                                    </div>
+                                    <div>
+                                        <Link to="/userlist">Users</Link>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
 
 

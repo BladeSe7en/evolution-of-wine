@@ -1,5 +1,6 @@
 const initialstate = {
-	order: {}
+	order   : {},
+	myOrders: []
 }
 
 export default function OrdersReducersReducer(state = initialstate, action) {
@@ -28,6 +29,13 @@ export default function OrdersReducersReducer(state = initialstate, action) {
 				return {
 					...state,
 					order: payload.order
+				}
+			}
+
+			case 'GET_ORDERS_FULFILLED': {
+				return {
+					...state,
+					myOrders: payload
 				}
 			}
 		

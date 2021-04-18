@@ -6,12 +6,6 @@ export default function SignInReducer(state = initialstate, action) {
 	const { payload, type } = action;
 
 	switch (type) {
-		case 'UPDATE_USER': {
-			return {
-				...state,
-				user: payload
-			}
-		};
 
 		case 'USER_REGISTER_PENDING':
 			return {

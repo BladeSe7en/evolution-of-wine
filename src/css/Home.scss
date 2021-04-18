@@ -139,10 +139,15 @@ a.brand {
     align-items: flex-start;
     padding-top: 50px;
 }
+
+.top {
+    padding-top: 50px;
+}
+
 .col-1 {
     flex: 1 1 25rem;
     padding-right: auto;
-    padding-left:auto;
+    padding-left: auto;
     margin-left: auto;
     margin-right: 15%;
 }
@@ -153,7 +158,7 @@ a.brand {
     margin-left: auto;
     margin-right: auto;
     padding-right: auto;
-    padding-left:auto;
+    padding-left: auto;
     background-color: white;
     button {
         background-color: #660022; // dark red
@@ -317,11 +322,11 @@ img.large {
 .sudo-background-black {
     background-color: rgba(255, 255, 255, 0.7);
     height: 100%;
-  //  width: 100%;
+    //  width: 100%;
 }
 
 .padding-bottom {
-    padding-bottom: 15.5%
+    padding-bottom: 15.5%;
 }
 
 .padding-bottom27 {
@@ -347,7 +352,6 @@ img.large {
     color: #f08000;
 }
 
-
 .checkout-height {
     height: 20vh;
 }
@@ -360,4 +364,84 @@ img.large {
 
 .add-width {
     width: 80%;
+}
+
+/* Table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    padding-top: 50px;
+    table-layout: fixed;
+}
+.table tbody tr:nth-of-type(odd) {
+    background-color: #f4f4f4;
+}
+.table td,
+.table th {
+    text-align: left;
+    border: 0.1rem solid #e4e4e4;
+    padding: 0.5rem;
+}
+.table button {
+    margin: 0 0.2rem;
+}
+
+// image Uploader
+
+.drop_zone {
+    display: flex;
+    height: 200px;
+    width: 100%;
+    background: white;
+    //background-image: url("/icons/upload.png");
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    background-color: #ffffff;
+    cursor: pointer;
+    border: 2px dashed #ccc;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    background-position: center 28px;
+}
+.drop_zone > p {
+    margin: auto;
+}
+.image {
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    display: inline-block;
+}
+.input-block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    input {
+        text-rendering: auto;
+        color: -internal-light-dark(black, white);
+        letter-spacing: normal;
+        word-spacing: normal;
+        text-transform: none;
+        text-indent: 0px;
+        text-shadow: none;
+        display: inline-block;
+        text-align: start;
+        appearance: auto;
+        background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+        -webkit-rtl-ordering: logical;
+        cursor: text;
+        margin: 0em;
+        font: 400 13.3333px Arial;
+        padding: 1px 2px;
+        border-width: 2px;
+        border-style: inset;
+        border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+        margin-bottom: 20px;
+
+    }
+}
+
+.center-text {
+    text-align: center;
 }

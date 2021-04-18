@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CheckoutSteps from '../CheckoutSteps/CheckoutSteps';
 import { savePaymentMethod } from '../Cart/CartActions'
+//import NavBarMini from '../NavBarMini/NavBarMini';
 
 export default function PaymentMethodScreen(props) {
     const { shippingAddress } = useSelector((state) => state.Cart);

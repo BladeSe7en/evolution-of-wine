@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LoadingBox from '../LoadingBox/LoadingBox';
 import MessageBox from '../MessageBox/MessageBox';
+import NavBarMini from '../NavBarMini/NavBarMini';
 import { register } from './RegisterScreenActions';
 
 export default function RegisterScreen(props) {
@@ -35,6 +36,7 @@ export default function RegisterScreen(props) {
     }, [props.history, redirect, user]);
     return (
         <div>
+            <NavBarMini />
             <form className="form" onSubmit={submitHandler}>
                 <div>
                     <h1>Create Account</h1>

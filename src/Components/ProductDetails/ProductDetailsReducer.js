@@ -26,6 +26,14 @@ export default function ProductDetailsReducer(state = initialstate, action) {
                 error: payload.message
 			}
         }
+
+// triggered from Product Edit Action -----------
+		case 'PRODUCT_UPDATE_RESET': {
+			return {
+				...state,
+				productInfo: {}
+			}
+		}
 		default: {
 			return state
         }

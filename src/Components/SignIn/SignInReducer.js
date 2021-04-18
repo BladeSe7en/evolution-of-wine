@@ -14,7 +14,9 @@ const initialstate = {
 const SignInReducer = (state = initialstate, action) => {
 	const { payload, type } = action;
 	switch (type) {
-		case 'UPDATE_USER': {
+		case 'UPDATE_USER_FULFILLED': {
+			localStorage.setItem('userInfo', JSON.stringify(payload));
+			console.log('this is payload in update user profile fulfilled')
 			return {
 				...state,
 				user: payload

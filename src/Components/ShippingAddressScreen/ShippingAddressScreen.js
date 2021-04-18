@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveShippingAddress } from '../Cart/CartActions';
 import CheckoutSteps from '../CheckoutSteps/CheckoutSteps'
+import NavBarMini from '../NavBarMini/NavBarMini';
 
 export default function ShippingAddressScreen(props) {
     const { user } = useSelector(state => state.SignIn);

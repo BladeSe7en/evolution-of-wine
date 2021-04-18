@@ -33,6 +33,8 @@ const orderSchema = new mongoose.Schema(
         user:          { type: String, required: true },
         isPaid:        { type: Boolean, default: false },
         paidAt:        { type: Date },
+        isFullfilled:  { type: Boolean, default: false },
+        fullfilledAt:  { type: Date },
         isDelivered:   { type: Boolean, default: false },
         deliveredAt:   { type: Date },
     },
