@@ -63,7 +63,7 @@ export default function DiscountCodeNew(props) {
                     </input>
                 </div>
                 <label id = 'expireLabel' htmlFor='doesThisExpire'>Does This Expire</label>
-                <div name = 'doesThisExpire' id = 'expire'>
+                <div className = 'doesThisExpire' name = 'doesThisExpire' id = 'expire'>
                     <label htmlFor='expireTrue'>True</label>
                     <input
                         type='radio'
