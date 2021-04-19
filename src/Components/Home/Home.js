@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import NavBar from '../NavBar/NavBar';
-import Product from '../Product/Product';
-import LoadingBox from '../LoadingBox/LoadingBox';
-import MessageBox from '../MessageBox/MessageBox';
+import bcrypt from 'bcryptjs';
+import NavBar from '../NavBarComponents/NavBar/NavBar';
+import Product from '../ProductComponents/Product/Product';
+import LoadingBox from '../UtilityComponents/LoadingBox/LoadingBox';
+import MessageBox from '../UtilityComponents/MessageBox/MessageBox';
 import { useDispatch, useSelector } from 'react-redux'
 import { getImages, listProducts } from './HomeActions';
-import bcrypt from 'bcryptjs';
 
 
 

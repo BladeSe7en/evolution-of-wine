@@ -131,6 +131,16 @@ a.brand {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    .nav-btn {
+        width: 20px;
+        height: 20px;
+    }
+    input {
+        width: 94%;
+    }
+    .search-icon {
+        height: 20px;
+    }
 }
 .row.center {
     justify-content: center;
@@ -310,6 +320,10 @@ img.large {
     margin-right: auto;
     margin-bottom: 0px;
     margin-left: auto;
+    #isPercentageLabel #expireLabel {
+        margin-left: 1rem;
+        margin-top: 1rem;
+    }
 }
 .form > div {
     display: flex;
@@ -444,4 +458,15 @@ img.large {
 
 .center-text {
     text-align: center;
+}
+
+.isPercentageLabel .expireLabel {
+    display: block;
+    margin: 1rem;
+}
+
+
+#isPercentage #expire {
+    display: block;
+    margin: 1rem;
 }
