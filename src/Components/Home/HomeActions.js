@@ -19,3 +19,13 @@ import axios from 'axios';
                     })
             }
         }
+
+        export const getBannerImages = () => {
+            return {
+                type: 'GET_BANNER_IMAGES',
+                payload: axios.get('/api/bannerImg')
+                    .then(response => {
+                        return response.data
+                    })
+            }
+        }

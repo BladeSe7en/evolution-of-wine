@@ -23,7 +23,6 @@ export const generateToken = (user) => {
 
 export const isAuth = (req, res, next) => {
     const authorization = req.headers.authorization;
-    console.log('req.headers: ',req.headers)
         console.log('req.file: ',req.file)
 
     if (authorization) {

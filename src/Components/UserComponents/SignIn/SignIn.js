@@ -6,11 +6,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import NavBarMini from '../../NavBarComponents/NavBarMini/NavBarMini';
 import { signin } from './SignInActions';
+import SideSearchBar from '../../NavBarComponents/SideSearchBar/SideSearchBar';
+import { toggleSideBar } from '../../NavBarComponents/SideSearchBar/SideSearchBarActions';
 
 
 const SignIn = (props) => {
     const { loading, error } = useSelector((state) => state.Home);
     const { user } = useSelector((state) => state.SignIn);
+    const { sideBarOpened } = useSelector((state) => state.SideSearchBar);
+
     const dispatch = useDispatch();
 
     const [email, setEmail] = useState('');
@@ -32,10 +36,15 @@ const SignIn = (props) => {
         }
     }, [props.history, redirect, user]);
 
+    useEffect(() => {
+        console.log('testing in home')
+        dispatch(toggleSideBar(true))
+    }, [])
 
     return (
-        <div className='signin-container' >
-            <NavBarMini />
+            <div className='signin-container' >
+            <SideSearchBar />
+                    <div className={`${sideBarOpened ? 'sudo-background-white-opened' : 'sudo-background-white-closed'}`}>
             <div>
                 <form className="form" onSubmit={submitHandler}>
                     <div>
@@ -75,6 +84,7 @@ const SignIn = (props) => {
                     </div>
                 </form>
             </div>
+        </div>
         </div>
     );
 }

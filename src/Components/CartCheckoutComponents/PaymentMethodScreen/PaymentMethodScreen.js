@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CheckoutSteps from '../CheckoutSteps/CheckoutSteps';
 import { savePaymentMethod } from '../Cart/CartActions'
+import SideSearchBar from '../../NavBarComponents/SideSearchBar/SideSearchBar';
+import { toggleSideBar } from '../../NavBarComponents/SideSearchBar/SideSearchBarActions';
 //import NavBarMini from '../NavBarMini/NavBarMini';
 
 export default function PaymentMethodScreen(props) {
     const { shippingAddress } = useSelector((state) => state.Cart);
     const [paymentMethod, setPaymentMethod] = useState('PayPal');
+    const { sideBarOpened } = useSelector((state) => state.SideSearchBar);
 
     if (!shippingAddress.address) {
         props.history.push('/shipping');
@@ -19,8 +22,17 @@ export default function PaymentMethodScreen(props) {
         dispatch(savePaymentMethod(paymentMethod));
         props.history.push('/placeorder');
     };
+
+    useEffect(() => {
+        console.log('testing in home')
+        dispatch(toggleSideBar(true))
+    }, [])
+
+
     return (
         <div>
+                        <SideSearchBar />
+                    <div className={`${sideBarOpened ? 'sudo-background-white-opened add-margin' : 'sudo-background-white-closed add-margin'}`}>
             <CheckoutSteps step1 step2 step3></CheckoutSteps>
             <form className="form" onSubmit={submitHandler}>
                 <div>
@@ -60,6 +72,7 @@ export default function PaymentMethodScreen(props) {
                     </button>
                 </div>
             </form>
+        </div>
         </div>
     );
 }

@@ -1,22 +1,31 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import DiscountCodeNew from '../../DiscountCodeNew/DiscountCodeNew';
-import LoadingBox from '../../../UtilityComponents/LoadingBox/LoadingBox';
-import MessageBox from '../../../UtilityComponents/MessageBox/MessageBox';
-import { getAllDiscountCodes, deleteCode } from './DiscountCodesActions';
+import LoadingBox from '../../UtilityComponents/LoadingBox/LoadingBox';
+import MessageBox from '../../UtilityComponents/MessageBox/MessageBox';
+import { getAllDiscountCodes, deleteCode, codeReset } from './DiscountCodesActions';
+import DiscountCodeNew from '../DiscountCodeNew/DiscountCodeNew';
+import { toggleSideBar } from '../../NavBarComponents/SideSearchBar/SideSearchBarActions';
+import SideSearchBar from '../../NavBarComponents/SideSearchBar/SideSearchBar';
 
 export default function DiscountCodes(props) {
-    const { allCodesLoading, allCodesError, allCodes, allCodesSuccess } = useSelector((state) => state.DiscountCodes);
+    const { allCodesLoading, allCodesError, allCodes, allCodesSuccess, deleteCodeSuccess } = useSelector((state) => state.DiscountCodes);
+    const { codeNewSuccess } = useSelector((state) => state.DiscountCodeNew);
     const { user } = useSelector((state) => state.SignIn);
     const { loading, error } = useSelector((state) => state.Home);
+    const { sideBarOpened } = useSelector((state) => state.SideSearchBar);
 
 
     const dispatch = useDispatch();
 
     useEffect(() => {
+        console.log('allCodesSuccess: : ' ,allCodesSuccess)
+        if ( deleteCodeSuccess || codeNewSuccess ) {
+            dispatch(codeReset())
+        }
+        console.log('codeNewSuccess: ',codeNewSuccess)
         dispatch(getAllDiscountCodes(user));
-    }, [dispatch, allCodesSuccess]);
+    }, [dispatch, allCodesSuccess, deleteCodeSuccess, codeNewSuccess]);
 
     const deleteHandler = (code) => {
         if (window.confirm(`Are you sure you want to delete ${code.name}?`)) {
@@ -38,8 +47,15 @@ export default function DiscountCodes(props) {
     let activeCodes = allCodes.filter((code) => isCodeActive(code.expireDate) === true)
     let oldCodes = allCodes.filter((code) => isCodeActive(code.expireDate) === false)
 
+    useEffect(() => {
+        console.log('testing in home')
+        dispatch(toggleSideBar(true))
+    }, [])
+
     return (
-        <div >
+        <div>
+            <SideSearchBar />
+                    <div className={`${sideBarOpened ? 'sudo-background-white-opened' : 'sudo-background-white-closed'}`}>
             <DiscountCodeNew />
             {allCodesLoading && <LoadingBox></LoadingBox>}
             {allCodesError && <MessageBox variant="danger">{allCodesError}</MessageBox>}
@@ -58,7 +74,7 @@ export default function DiscountCodes(props) {
                                     <th>NAME</th>
                                     <th>DURATION</th>
                                     <th>EXPIRE DATE</th>
-                                    <th>VALUE</th>
+                                    <th>DISCOUNT VALUE</th>
                                     <th>IS PERCENTAGE</th>
                                     <th>ACTIONS</th>
                                 </tr>
@@ -68,8 +84,9 @@ export default function DiscountCodes(props) {
                                     <tr key={code._id}>
                                         <td>{code._id}</td>
                                         <td>{code.name}</td>
+                                        <td>{code.duration === 0 ? 'Infinity' : code.duration}</td>
                                         <td>{code.expireDate}</td>
-                                        <td>{code.value}</td>
+                                        <td>{code.isPercentage ? `${code.discount}% off` : `$ ${code.discount} off`}</td>
                                         <td>{code.isPercentage ? 'YES' : 'NO'}</td>
                                         <td>
                                             <button
@@ -81,7 +98,7 @@ export default function DiscountCodes(props) {
                                             <button
                                                 type="button"
                                                 className="small"
-                                                onClick={() => deleteHandler(code._id)} >
+                                                onClick={() => deleteHandler(code)} >
                                                 Delete
                                             </button>
                                         </td>
@@ -134,6 +151,7 @@ export default function DiscountCodes(props) {
                     </div>
                 </>
             )}
+        </div>
         </div>
     );
 }

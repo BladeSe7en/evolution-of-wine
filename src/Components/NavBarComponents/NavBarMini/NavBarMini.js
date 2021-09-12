@@ -71,7 +71,7 @@ const NavBarMini = (props) => {
             <nav id="hamnav"  >
                 <div className='small-screen-nav'>
 
-                    <label htmlfor="hamburger">&#9776;</label>
+                    <label htmlFor="hamburger">&#9776;</label>
                     <div className="hamburger-dropdown">
                         <input type="checkbox" id="hamburger" className="dropbtn" />
                         <div className="burger-dropdown-content">
@@ -105,21 +105,6 @@ const NavBarMini = (props) => {
                     <div id='ship-to' className='deliver-to'>
                         <h1>Deliver to:</h1>
                         <h1>{shippingAddress.address ? shippingAddress.address : ''}</h1>
-                    </div>
-
-                    <div id='search' className='search-bar'>
-                        <div className="dropdown">
-                            <button className="dropbtn">All <img src={'/images/chevron_down.png'} className="chevron" alt="logo" /></button>
-                            <div className="dropdown-content">
-                                <a href="example.com">Category 1</a>
-                                <a href="example.com">Category 2</a>
-                                <a href="example.com">Category 3</a>
-                            </div>
-                        </div>
-                        <input></input>
-                        <div>
-                            <button className='nav-btn' onClick={() => setChange(!change)}> <img className='search-icon' alt='icon' src={'/images/white-seach-icon.png'} /> </button>
-                        </div>
                     </div>
 
                     <div id='nav-buttons' className='nav-btn-container'>
@@ -167,6 +152,9 @@ const NavBarMini = (props) => {
                                     </div>
                                     <div>
                                         <Link to="/discountCodes">Discount Codes</Link>
+                                    </div>
+                                    <div>
+                                        <Link to="/stats">Stats</Link>
                                     </div>
                                 </div>
                             </div>

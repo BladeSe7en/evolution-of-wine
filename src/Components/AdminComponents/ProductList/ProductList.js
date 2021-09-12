@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../../Home/HomeActions';
+import SideSearchBar from '../../NavBarComponents/SideSearchBar/SideSearchBar';
+import { toggleSideBar } from '../../NavBarComponents/SideSearchBar/SideSearchBarActions';
 import LoadingBox from '../../UtilityComponents/LoadingBox/LoadingBox';
 import MessageBox from '../../UtilityComponents/MessageBox/MessageBox';
 import { createProduct, productCreateReset, productDelete, productDeleteReset } from './ProductListActions';
@@ -9,6 +11,7 @@ export default function ProductListScreen(props) {
     const { createLoading, createSeccess, createError, createdProduct, deleteSuccess, deleteLoading, deleteError } = useSelector((state) => state.ProductList);
     const { loading, error, products } = useSelector((state) => state.Home);
     const { user } = useSelector((state) => state.SignIn);
+    const { sideBarOpened } = useSelector((state) => state.SideSearchBar);
 
 
 
@@ -39,8 +42,16 @@ export default function ProductListScreen(props) {
     const createHandler = () => {
         dispatch(createProduct(user))
     }
+
+    useEffect(() => {
+        console.log('testing in home')
+        dispatch(toggleSideBar(true))
+    }, [])
+
     return (
         <div>
+            <SideSearchBar />
+                    <div className={`${sideBarOpened ? 'sudo-background-white-opened  small-margin' : 'sudo-background-white-closed  small-margin'}`}>
             <div className="row">
                 <h1>Products</h1>
                 <button type="button" className="primary" onClick={createHandler}>
@@ -99,6 +110,7 @@ export default function ProductListScreen(props) {
                     </tbody>
                 </table>
             )}
+        </div>
         </div>
     );
 }

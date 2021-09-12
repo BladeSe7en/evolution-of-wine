@@ -8,6 +8,7 @@ const discountCodeSchema = new mongoose.Schema(
         isPercentage: { type: Boolean, required: true },
         discount: { type: Number, required: true },
         expireDate: { type: String },
+        timesUsed: { type: Number, required: true, default: 0 },
     },
     {
         timestamps: true,

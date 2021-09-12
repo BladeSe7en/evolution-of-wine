@@ -1,5 +1,6 @@
 import { combineReducers }     from 'redux';
 import HomeReducer             from './Components/Home/HomeReducer';
+import StoreFrontReducer       from './Components/StoreFront/StoreFrontReducer';
 import SignInReducer           from './Components/UserComponents/SignIn/SignInReducer';
 import ProductDetailsReducer   from './Components/ProductComponents/ProductDetails/ProductDetailsReducer';
 import CartReducer             from './Components/CartCheckoutComponents/Cart/CartReducer';
@@ -14,13 +15,18 @@ import AdminOrdersListReducer  from './Components/AdminComponents/AdminOrdersLis
 import ListAllUsersReducer     from './Components/AdminComponents/ListAllUsers/ListAllUsersReducer';
 import UserEditScreenReducer   from './Components/AdminComponents/UserEditScreen/UserEditScreenReducer';
 import PlaceOrderScreenReducer from './Components/CartCheckoutComponents/PlaceOrderScreen/PlaceOrderScreenReducer';
-import DiscountCodesReducer    from './Components/AdminComponents/AdminOrdersList/DiscountCodes/DiscountCodesReducer';
+import DiscountCodesReducer    from './Components/AdminComponents/DiscountCodes/DiscountCodesReducer';
+import DiscountCodeEditReducer from './Components/AdminComponents/DiscountCodeEdit/DiscountCodeEditReducer';
+import DiscountCodeNewReducer  from './Components/AdminComponents/DiscountCodeNew/DiscountCodeNewReducer';
+import StatsContainerReducer   from './Components/StatsComponents/StatsContainer/StatsContainerReducer';
+import SideSearchBarReducer    from './Components/NavBarComponents/SideSearchBar/SideSearchBarReducer';
 
 
 
 const rootReducer = combineReducers({
     SignIn          : SignInReducer,
     Home            : HomeReducer,
+    StoreFront      : StoreFrontReducer,
     ProductDetails  : ProductDetailsReducer,
     Cart            : CartReducer,
     NavBarMini      : NavBarMiniReducer,
@@ -34,7 +40,11 @@ const rootReducer = combineReducers({
     ListAllUsers    : ListAllUsersReducer,
     UserEditScreen  : UserEditScreenReducer,
     PlaceOrderScreen: PlaceOrderScreenReducer,
-    DiscountCodes   : DiscountCodesReducer
+    DiscountCodes   : DiscountCodesReducer,
+    DiscountCodeEdit: DiscountCodeEditReducer,
+    DiscountCodeNew : DiscountCodeNewReducer,
+    StatsContainer  : StatsContainerReducer,
+    SideSearchBar   : SideSearchBarReducer
     
 });
 

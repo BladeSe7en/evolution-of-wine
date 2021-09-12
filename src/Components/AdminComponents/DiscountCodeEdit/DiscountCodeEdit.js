@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -5,14 +6,15 @@ import LoadingBox from '../../UtilityComponents/LoadingBox/LoadingBox';
 import MessageBox from '../../UtilityComponents/MessageBox/MessageBox';
 import { updateCode, getCode, codeUpdateReset } from './DiscountCodeEditActions'
 
-export default function DiscountCodeEdit(props) {
-    const { codeEditLoading, codeEditError, codeEditSuccess, selecteCode } = useSelector((state) => state.DiscountCodeEdit);
+const DiscountCodeEdit = (props) => {
+    const { codeEditLoading, codeEditError, codeEditSuccess, selectedCode } = useSelector((state) => state.DiscountCodeEdit);
     const { loading, error } = useSelector((state) => state.Home);
     const { user } = useSelector((state) => state.SignIn);
 
     const codeId = props.match.params.id;
 
     const [name, setName] = useState('');
+    const [doesThisExpire, setDoesThisExpire] = useState(true);
     const [duration, setDuration] = useState('');
     const [discountValue, setDiscountValue] = useState('');
     const [isPercentage, setIsPercentage] = useState(false);
@@ -24,21 +26,38 @@ export default function DiscountCodeEdit(props) {
             dispatch(codeUpdateReset());
             props.history.push('/discountCodes');
         }
-        if (selecteCode.name === '') {
+        if (selectedCode === '') {
+            console.log('this is codeID: ', codeId)
             dispatch(getCode(codeId, user))
         } else {
-            setName(selecteCode.name)
-            setDuration(selecteCode.duration)
-            setDiscountValue(selecteCode.discountValue)
-            setIsPercentage(selecteCode.isPersetIsPercentage)
+            console.log('this is selectedCode: ',selectedCode)
+            setName(selectedCode.name)
+            setDuration(selectedCode.duration)
+            setDiscountValue(selectedCode.discount)
+            setIsPercentage(selectedCode.isPersetIsPercentage)
         }
 
-    }, [dispatch, props.history, codeEditSuccess, codeId, user, selecteCode]);
+    }, [dispatch, props.history, codeEditSuccess, codeId, user, selectedCode]);
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(updateCode( codeId, user, name, duration, discountValue, isPercentage ));
+        let todayDate = moment();
+        let expirationDate = doesThisExpire ? todayDate.add(duration, 'days').format('DD-MM-YYYY') : 'none'
+        dispatch(updateCode(codeId, name, doesThisExpire, duration, isPercentage, discountValue, expirationDate, user));
     };
+
+    const handleExpire = (txt) => {
+        let durInput = document.getElementById('duration');
+        setDoesThisExpire(txt)
+        if (txt === true) {
+            durInput.disabled = false;
+        }
+        else {
+            durInput.disabled = true;
+        }
+    }
+
+
     return (
         <div>
             <form className="form" onSubmit={submitHandler}>
@@ -56,43 +75,77 @@ export default function DiscountCodeEdit(props) {
                 ) : (
                     <>
                         <div>
-                            <label htmlFor="name">Name</label>
+                            <label htmlFor='name'>Name</label>
                             <input
-                                id="name"
-                                type="text"
-                                placeholder="Enter name"
-                                value={name}
+                                type='text'
+                                id='name'
+                                placeholder='Enter name'
+                                value = {name}
+                                required
                                 onChange={(e) => setName(e.target.value)} >
                             </input>
                         </div>
-                        <div>
-                            <label htmlFor="duration">Duration</label>
+                        <label id='expireLabel' htmlFor='doesThisExpire'>Does This Expire</label>
+                        <div id='doesThisExpire' name='doesThisExpire' >
+                            <label htmlFor='expireTrue'>True</label>
                             <input
-                                id="duration"
-                                type="duration"
-                                placeholder="Enter duration"
-                                value={duration}
-                                onChange={(e) => setDuration(e.target.value)} >
-                            </input>
+                                type='radio'
+                                id='expireTrue'
+                                name='expire'
+                                required
+                                onChange={() => handleExpire(true)}
+                            ></input>
+
+                            <label htmlFor='false'>False</label>
+                            <input
+                                type='radio'
+                                id='false'
+                                name='expire'
+                                onChange={() => handleExpire(false)}
+                            ></input>
+                        </div>
+
+                        <div>
+                            <label htmlFor='duration'>Duration in Days</label>
+                            <input
+                                type='text'
+                                id='duration'
+                                placeholder='Enter duration'
+                                value = {duration === 0 ? 'infinity' : duration}
+                                required
+                                onChange={(e) => setDuration(e.target.value)}
+                            ></input>
+                        </div>
+                        <label id='isPercentageLabel' htmlFor='isPercentage'>Is This A Percentage</label>
+                        <div id='isPercentage'>
+                            <label htmlFor='true'>True</label>
+                            <input
+                                type='radio'
+                                id='true'
+                                value='true'
+                                name='isPercentage'
+                                required
+                                onChange={() => setIsPercentage(true)}
+                            ></input>
+
+                            <label htmlFor='false'>False</label>
+                            <input
+                                type='radio'
+                                id='false'
+                                value='false'
+                                name='isPercentage'
+                                onChange={() => setIsPercentage(false)}
+                            ></input>
                         </div>
                         <div>
-                            <label htmlFor="discountValue">Discount Value</label>
+                            <label htmlFor='discountValue'>Discount Value</label>
                             <input
-                                id="discountValue"
-                                type="discountValue"
-                                placeholder="Enter Discount Value"
-                                value={discountValue}
-                                onChange={(e) => setDiscountValue(e.target.value)} >
-                            </input>
-                        </div>
-                        <div>
-                            <label htmlFor="isPercentage">Is Percentage</label>
-                            <input
-                                id="isPercentage"
-                                type="checkbox"
-                                checked={isPercentage}
-                                onChange={(e) => setIsPercentage(e.target.checked)} >
-                            </input>
+                                type='text'
+                                id='discountValue'
+                                value = {discountValue}
+                                placeholder='Enter Discount Value'
+                                onChange={(e) => setDiscountValue(e.target.value)}
+                            ></input>
                         </div>
                         <div>
                             <button type="submit" className="primary">
@@ -105,3 +158,4 @@ export default function DiscountCodeEdit(props) {
         </div>
     );
 }
+export default DiscountCodeEdit;

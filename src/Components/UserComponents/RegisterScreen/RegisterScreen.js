@@ -5,12 +5,15 @@ import LoadingBox from '../../UtilityComponents/LoadingBox/LoadingBox';
 import MessageBox from '../../UtilityComponents/MessageBox/MessageBox';
 import NavBarMini from '../../NavBarComponents/NavBarMini/NavBarMini';
 import { register } from './RegisterScreenActions';
+import { toggleSideBar } from '../../NavBarComponents/SideSearchBar/SideSearchBarActions';
+import SideSearchBar from '../../NavBarComponents/SideSearchBar/SideSearchBar';
 
 export default function RegisterScreen(props) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const { sideBarOpened } = useSelector((state) => state.SideSearchBar);
 
     const redirect = props.location.search
 
@@ -34,9 +37,16 @@ export default function RegisterScreen(props) {
             props.history.push(redirect);
         }
     }, [props.history, redirect, user]);
+
+    useEffect(() => {
+        console.log('testing in home')
+        dispatch(toggleSideBar(true))
+    }, [])
+
     return (
         <div>
-            <NavBarMini />
+            <SideSearchBar />
+                    <div className={`${sideBarOpened ? 'sudo-background-white-opened' : 'sudo-background-white-closed'}`}>
             <form className="form" onSubmit={submitHandler}>
                 <div>
                     <h1>Create Account</h1>
@@ -97,6 +107,7 @@ export default function RegisterScreen(props) {
                     </div>
                 </div>
             </form>
+        </div>
         </div>
     );
 }

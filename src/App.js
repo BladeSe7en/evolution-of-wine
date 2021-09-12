@@ -23,8 +23,10 @@ import ProductEdit           from './Components/AdminComponents/ProductEdit/Prod
 import AdminOrdersList       from './Components/AdminComponents/AdminOrdersList/AdminOrdersList';
 import ListAllUsers          from './Components/AdminComponents/ListAllUsers/ListAllUsers';
 import UserEditScreen        from './Components/AdminComponents/UserEditScreen/UserEditScreen';
-import DiscountCodes         from './Components/AdminComponents/AdminOrdersList/DiscountCodes/DiscountCodes';
+import DiscountCodes         from './Components/AdminComponents/DiscountCodes/DiscountCodes';
 import DiscountCodeEdit      from './Components/AdminComponents/DiscountCodeEdit/DiscountCodeEdit';
+import StatsContainer        from './Components/StatsComponents/StatsContainer/StatsContainer';
+import StoreFront            from './Components/StoreFront/StoreFront'
 
 
 
@@ -49,6 +51,10 @@ function App() {
         <AdminRoute path="/user/:id/edit"         component={UserEditScreen} />
         <AdminRoute path="/discountCodes"         component={DiscountCodes} />
         <AdminRoute path="/discountCode/:id/Edit" component={DiscountCodeEdit} />
+        <AdminRoute path="/stats"                 component={StatsContainer} />
+        <Route exact path='/store'                component={StoreFront} />
+
+
 
 
 

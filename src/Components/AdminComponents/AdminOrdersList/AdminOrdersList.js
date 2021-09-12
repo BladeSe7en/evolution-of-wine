@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AdminNav from '../../NavBarComponents/AdminNav/adminNav';
+import SideSearchBar from '../../NavBarComponents/SideSearchBar/SideSearchBar';
+import { toggleSideBar } from '../../NavBarComponents/SideSearchBar/SideSearchBarActions';
 import LoadingBox from '../../UtilityComponents/LoadingBox/LoadingBox';
 import MessageBox from '../../UtilityComponents/MessageBox/MessageBox';
 import { getAllOrders, deleteOrder, deliverOrder, deleteOrderReset } from './AdminOrdersListActions';
@@ -8,6 +10,8 @@ import { getAllOrders, deleteOrder, deliverOrder, deleteOrderReset } from './Adm
 export default function AdminOrdersList(props) {
     const { adminListLoading, adminListError, adminListAllOrders, adminDeleteOrderSuccess, adminDeleteOrderError, AdminDeleteOrderLoading } = useSelector((state) => state.AdminOrdersList);
     const { user } = useSelector((state) => state.SignIn);
+    const { sideBarOpened } = useSelector((state) => state.SideSearchBar);
+
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -24,9 +28,15 @@ export default function AdminOrdersList(props) {
     let deliveryInProggress = adminListAllOrders.filter((order) => order.isPaid === true && order.isFullfilled === true && order.isDelivered === false);
     let allDeliveredOrders = adminListAllOrders.filter((order) => order.isPaid === true && order.isFullfilled === true && order.isDelivered === true);
     let style = ''
+        useEffect(() => {
+        console.log('testing in home')
+        dispatch(toggleSideBar(true))
+    }, [])
+
     return (
         <div>
-            <AdminNav/>
+            <SideSearchBar />
+                    <div className={`${sideBarOpened ? 'sudo-background-white-opened  small-margin' : 'sudo-background-white-closed  small-margin'}`}>
             <h1 className = 'orders-header'>Orders</h1>
             {adminListLoading ? (
                 <LoadingBox></LoadingBox>
@@ -208,6 +218,7 @@ export default function AdminOrdersList(props) {
                     </div>
                 </div>
             )}
+        </div>
         </div>
     );
 }

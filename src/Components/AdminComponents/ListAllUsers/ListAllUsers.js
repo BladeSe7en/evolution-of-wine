@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import SideSearchBar from '../../NavBarComponents/SideSearchBar/SideSearchBar';
+import { toggleSideBar } from '../../NavBarComponents/SideSearchBar/SideSearchBarActions';
 import { listUsers, deleteUser } from './ListAllUsersActions';
 
 export default function UserListScreen(props) {
     const { allUsersLoading, allUsersError, allUsers, deleteUserSuccess, deleteUserError, deleteUserLoading } = useSelector((state) => state.ListAllUsers);
     const { user } = useSelector((state) => state.SignIn);
     const { loading, error } = useSelector((state) => state.Home);
+    const { sideBarOpened } = useSelector((state) => state.SideSearchBar);
 
 
     const dispatch = useDispatch();
@@ -23,8 +26,15 @@ export default function UserListScreen(props) {
     let admins = allUsers.filter((user) => user.isAdmin)
     let users = allUsers.filter((user) => !user.isAdmin)
 
+    useEffect(() => {
+        console.log('testing in home')
+        dispatch(toggleSideBar(true))
+    }, [])
+
     return (
-                <div >
+        <div>
+            <SideSearchBar />
+                    <div className={`${sideBarOpened ? 'sudo-background-white-opened' : 'sudo-background-white-closed'}`}>
                     <div className='tables-display'>
                         <h1 className='center-text'> All Admins </h1>
                         <table className="table">
@@ -102,6 +112,7 @@ export default function UserListScreen(props) {
                             </tbody>
                         </table>
                     </div>
+                </div>
                 </div>
     );
 }

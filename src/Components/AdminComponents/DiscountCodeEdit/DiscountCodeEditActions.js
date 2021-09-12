@@ -1,21 +1,23 @@
 import axios from 'axios'
 
 
-export const updateCode = ( codeId, user, name, duration, discountValue, isPercentage ) => {
+export const updateCode = ( codeId, name, doesThisExpire, duration, isPercentage, discountValue, expireDate, user ) => {
     return {
         type: 'UPDATE_CODE',
         payload: axios({
             method: 'PUT',
-            url: `/api/discountCode/${codeId}`,
+            url: `/api/discountCode/updateCode/${codeId}`,
             headers: {
                 "Authorization": `Bearer ${user.token}`,
                 "Content-type": "application/json; charset=UTF-8"
             },
             data: {
                 name,
+                doesThisExpire, 
                 duration, 
+                isPercentage, 
                 discountValue, 
-                isPercentage
+                expireDate
             }
         })
             .then(response => {
@@ -28,10 +30,10 @@ export const updateCode = ( codeId, user, name, duration, discountValue, isPerce
 
 export const getCode = (selectedCode, user) => {
     return {
-        type: 'GET_USER',
+        type: 'GET_CODE',
         payload: axios({
             method: 'get',
-            url: `/api/users/${selectedCode}`,
+            url: `/api/discountCode/${selectedCode}`,
             headers: {
                 "Authorization": `Bearer ${user.token}`,
                 "Content-type": "application/json; charset=UTF-8"

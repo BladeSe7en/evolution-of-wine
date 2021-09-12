@@ -19,12 +19,13 @@ export const getAllDiscountCodes = ( user ) => {
 };
 
 
-export const deleteCode = ( deletedCodeId, user ) => {
+export const deleteCode = ( code, user ) => {
+    console.log('this is code to delete: ',code._id)
     return {
         type: 'DELETE_CODE',
         payload: axios({
             method: 'DELETE',
-            url: `/api/discountCodes/${deletedCodeId}`,
+            url: `/api/discountCode/${code._id}`,
             headers: {
                 "Authorization": `Bearer ${user.token}`,
                 "Content-type": "application/json; charset=UTF-8"
@@ -36,3 +37,10 @@ export const deleteCode = ( deletedCodeId, user ) => {
             })
     }
 };
+
+export const codeReset = () => {
+    return {
+        type: 'CODE_RESET',
+    };
+}
+

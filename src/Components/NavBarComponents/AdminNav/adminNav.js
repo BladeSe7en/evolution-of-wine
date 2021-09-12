@@ -55,7 +55,7 @@ const AdminNav = (props) => {
             <nav id="hamnav"  >
                 <div className='small-screen-nav'>
 
-                    <label htmlfor="hamburger">&#9776;</label>
+                    <label htmlFor="hamburger">&#9776;</label>
                     <div className="hamburger-dropdown">
                         <input type="checkbox" id="hamburger" className="dropbtn" />
                         <div className="burger-dropdown-content">
@@ -89,6 +89,9 @@ const AdminNav = (props) => {
                         </Link>
                         <Link to="/adminOrderList">
                             <button className='nav-btn no-width' onClick={() => setChange(!change)}> All Orders  </button>
+                        <Link to="/stats">
+                            <button className='nav-btn no-width' onClick={() => setChange(!change)}> Stats  </button>
+                        </Link>
                         </Link>
                     </div>
                 </div>

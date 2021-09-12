@@ -9,7 +9,7 @@ const NavBar = () => {
     return (
         <div className='nav-container' style = {{backgroundImage: `url('/images/red-background-painting.jpg')`}}>
             <div className = 'background-mask'>
-            <NavBarMini />
+            {/* <NavBarMini /> */}
             <div className='logo-header' >
                 <img src={'/images/EvolutionofWineLogoWhite.png'} className="logo" alt="logo" />
             </div>

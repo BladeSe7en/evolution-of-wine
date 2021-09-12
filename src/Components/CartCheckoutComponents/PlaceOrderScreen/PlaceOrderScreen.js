@@ -6,6 +6,8 @@ import LoadingBox from '../../UtilityComponents/LoadingBox/LoadingBox';
 import MessageBox from '../../UtilityComponents/MessageBox/MessageBox';
 //import NavBarMini from '../NavBarMini/NavBarMini';
 import { createOrder, checkDiscountCode } from './PlaceOrderScreenActions';
+import SideSearchBar from '../../NavBarComponents/SideSearchBar/SideSearchBar';
+import { toggleSideBar } from '../../NavBarComponents/SideSearchBar/SideSearchBarActions';
 
 export default function PlaceOrderScreen(props) {
     const { paymentMethod, cartItems, shippingAddress, success } = useSelector((state) => state.Cart);
@@ -15,6 +17,7 @@ export default function PlaceOrderScreen(props) {
     const user = useSelector((state) => state.SignIn);
     const { discountUsed, isPercentage, discountAmount, discountLoading, discountSeccess, discountError } = useSelector((state) => state.PlaceOrderScreen);
     const [ discountCode, setDiscountCode ] = useState('')
+    const { sideBarOpened } = useSelector((state) => state.SideSearchBar);
 
     if (!paymentMethod) {
         props.history.push('/payment');
@@ -65,14 +68,21 @@ let newOrder = {
         }
     }, [dispatch, props.history, order, success])
 
+    useEffect(() => {
+        console.log('testing in home')
+        dispatch(toggleSideBar(true))
+    }, [])
+
     return (
         <div>
+                                    <SideSearchBar />
+                    <div className={`${sideBarOpened ? 'sudo-background-white-opened add-margin' : 'sudo-background-white-closed add-margin'}`}>
             <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
             <div className="row top">
-                <div className="col-2">
+                <div className="coll-2">
                     <ul>
                         <li>
-                            <div className="card card-body">
+                            <div id= 'padding' className="card card-body">
                                 <h2>Shipping</h2>
                                 <p>
                                     <strong>Name:</strong> {fullName} <br />
@@ -83,7 +93,7 @@ let newOrder = {
                             </div>
                         </li>
                         <li>
-                            <div className="card card-body">
+                            <div  id= 'padding' className="card card-body">
                                 <h2>Payment</h2>
                                 <p>
                                     <strong>Method:</strong> {paymentMethod}
@@ -91,7 +101,7 @@ let newOrder = {
                             </div>
                         </li>
                         <li>
-                            <div className="card card-body">
+                            <div  id= 'padding' className="card card-body">
                                 <h2>Order Items</h2>
                                 <ul>
                                     {cartItems.map((item) => (
@@ -121,8 +131,8 @@ let newOrder = {
                         </li>
                     </ul>
                 </div>
-                <div className="col-1">
-                    <div className="card card-body">
+                <div className="coll-1">
+                    <div  id= 'padding' className="card card-body">
                         <ul>
                             <li>
                                 <h2>Order Summary</h2>
@@ -146,7 +156,7 @@ let newOrder = {
                                 </div>
                             </li>
                             <li>
-                                <div className="row">
+                                <div className="row width100">
                                     <input
                                         id="discountCode"
                                         type="text"
@@ -196,6 +206,7 @@ let newOrder = {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     )
 }

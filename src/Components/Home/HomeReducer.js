@@ -2,7 +2,8 @@ const initialstate = {
 	loading: false,
 	products: [],
 	error: '',
-	images: []
+	images: [],
+	bannerImgs: ['test']
 }
 
 const HomeReducer = (state = initialstate, action) => {
@@ -168,18 +169,6 @@ const HomeReducer = (state = initialstate, action) => {
 				products: newProducts
 			}
 		}
-
-		// case 'CREATE_PRODUCT_FULFILLED': {
-		// 	let oldProducts = state.products
-		// 	console.log('payload.product after create_product',payload.product)
-		// 	let newProducts = oldProducts.splice(1, 0, payload.product)
-		// 	console.log('newProducts: ',newProducts)
-		// 	return {
-		// 		...state,
-		// 		products: newProducts
-		// 	}
-		// }
-
 
 // Triggered from Product Edit ------------------------
 		case 'UPDATE_PRODUCT_PENDING': {

@@ -3,6 +3,7 @@ import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import DiscountCode from '../models/discountCode.js';
 import { generateToken, isAuth, isAdmin } from '../utils.js';
+import stats from '../models/statsModel.js';
 
 const discountCodeRouter = express.Router();
 
@@ -46,8 +47,13 @@ discountCodeRouter.post(
         console.log('req.body.discountValue: ',req.body.discountValue)
         console.log('req.body.expireDate: ',req.body.expireDate)
     
+
+
+ 
+
+
         const newCode = new DiscountCode({
-            name: bcrypt.hashSync(req.body.name, 8),
+            name: req.body.name,
             doesThisExpire: req.body.doesThisExpire,
             duration: req.body.duration,
             isPercentage: req.body.isPercentage,
@@ -71,25 +77,33 @@ discountCodeRouter.post(
 
 // updates existing code
 discountCodeRouter.put(
-    '/updateCode',
+    '/updateCode/:id',
     isAuth,
     isAdmin,
     asyncHandler(async (req, res) => {
-        const code = await DiscountCode.findById(req.body._id);
+        const code = await DiscountCode.findById(req.params.id);
+        console.log('req.body._id: ',req.params.id)
         console.log('found code: ', code)
+
         if (code) {
-            code.name = req.body.name || code.name;
-            code.email = req.body.email || code.email;
-            if (req.body.name) {
-                code.name = bcrypt.hashSync(req.body.name, 8);
-            }
+            code.name           = req.body.name           || code.name;
+            code.doesThisExpire = req.body.doesThisExpire || code.doesThisExpire;
+            code.duration       = req.body.duration       || code.duration;
+            code.isPercentage   = req.body.isPercentage   || code.isPercentage;
+            code.discount       = req.body.discountValue  || code.discountValue;
+            code.expireDate     = req.body.expireDate     || code.expireDate;
+
             const updatedcode = await code.save();
             res.send({
-                _id: updatedcode._id,
-                name: updatedcode.name,
-                email: updatedcode.email,
-                isAdmin: updatedcode.isAdmin,
-                token: generateToken(updatedcode),
+                _id           : updatedcode._id,
+                name          : updatedcode.name,
+                doesThisExpire: updatedcode.doesThisExpire,
+                duration      : updatedcode.duration,
+                isPercentage  : updatedcode.doesThisExpire,
+                discount      : updatedcode.discount,
+                expireDate    : updatedcode.expireDate,
+
+
             });
         }
     })
@@ -103,7 +117,8 @@ discountCodeRouter.delete(
     isAdmin,
     asyncHandler(async (req, res) => {
         const code = await DiscountCode.findById(req.params.id);
-        if (user) {
+        console.log('found code to delete: code')
+        if (code) {
             const deleteCode = await code.remove();
             res.send({ message: 'Discount Code Deleted', code: deleteCode });
         } else {
@@ -113,4 +128,3 @@ discountCodeRouter.delete(
 );
 
 export default discountCodeRouter;
-

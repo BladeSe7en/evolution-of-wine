@@ -9,8 +9,8 @@ import uploadRouter from './routers/uploadRouter.js';
 import errorhandler from 'errorhandler';
 import notifier from 'node-notifier';
 import discountCodeRouter from './routers/discountCodeRouter.js';
+import statsRouter from './routers/statsRouter.js';
 dotenv.config()
-
 
 const app = express();
 app.use(express.json());
@@ -23,12 +23,13 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 
-
 app.use('/api/uploads', uploadRouter);
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/discountCode', discountCodeRouter);
+app.use('/api/stats', statsRouter);
+
 app.get('/api/config/paypal', (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID || 'sb')
 });

@@ -63,7 +63,7 @@ export default function DiscountCodeNew(props) {
                     </input>
                 </div>
                 <label id = 'expireLabel' htmlFor='doesThisExpire'>Does This Expire</label>
-                <div className = 'doesThisExpire' name = 'doesThisExpire' id = 'expire'>
+                <div id = 'doesThisExpire' name = 'doesThisExpire' >
                     <label htmlFor='expireTrue'>True</label>
                     <input
                         type='radio'
@@ -92,7 +92,7 @@ export default function DiscountCodeNew(props) {
                         onChange={(e) => setDuration(e.target.value)}
                     ></input>
                 </div>
-                <label id = 'isPercentageLabel' htmlFor='isPercentage'>Is Percentage</label>
+                <label id = 'isPercentageLabel' htmlFor='isPercentage'>Is This A Percentage</label>
                 <div id = 'isPercentage'>
                     <label htmlFor='true'>True</label>
                     <input

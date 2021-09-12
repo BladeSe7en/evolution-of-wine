@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveShippingAddress } from '../Cart/CartActions';
 import CheckoutSteps from '../CheckoutSteps/CheckoutSteps'
 import NavBarMini from '../../NavBarComponents/NavBarMini/NavBarMini';
+import SideSearchBar from '../../NavBarComponents/SideSearchBar/SideSearchBar';
+import { toggleSideBar } from '../../NavBarComponents/SideSearchBar/SideSearchBarActions';
 
 export default function ShippingAddressScreen(props) {
     const { user } = useSelector(state => state.SignIn);
@@ -12,6 +14,7 @@ export default function ShippingAddressScreen(props) {
     const [city,       setCity]       = useState(shippingAddress.city);
     const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
     const [country,    setCountry]    = useState(shippingAddress.country);
+    const { sideBarOpened } = useSelector((state) => state.SideSearchBar);
 
     const dispatch = useDispatch();
     
@@ -19,7 +22,6 @@ export default function ShippingAddressScreen(props) {
         props.history.push('/signin');
     }
 
-   
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -28,8 +30,17 @@ export default function ShippingAddressScreen(props) {
         );
         props.history.push('/payment');
     };
+
+    useEffect(() => {
+        console.log('testing in home')
+        dispatch(toggleSideBar(true))
+    }, [])
+
+
     return (
         <div>
+                        <SideSearchBar />
+                    <div className={`${sideBarOpened ? 'sudo-background-white-opened add-margin' : 'sudo-background-white-closed add-margin'}`}>
             <CheckoutSteps step1 step2></CheckoutSteps>
             <form className="form" onSubmit={submitHandler}>
                 <div>
@@ -97,6 +108,7 @@ export default function ShippingAddressScreen(props) {
                     </button>
                 </div>
             </form>
+        </div>
         </div>
     );
 }

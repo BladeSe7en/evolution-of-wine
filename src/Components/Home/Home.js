@@ -1,63 +1,82 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import bcrypt from 'bcryptjs';
 import NavBar from '../NavBarComponents/NavBar/NavBar';
-import Product from '../ProductComponents/Product/Product';
-import LoadingBox from '../UtilityComponents/LoadingBox/LoadingBox';
-import MessageBox from '../UtilityComponents/MessageBox/MessageBox';
 import { useDispatch, useSelector } from 'react-redux'
-import { getImages, listProducts } from './HomeActions';
-
+import { getBannerImages, listProducts } from './HomeActions';
+import SideSearchBar from '../NavBarComponents/SideSearchBar/SideSearchBar';
+import bannerImgs from '../../bannerImgs';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import SchedulingHome from '../SchedulingComponents/SchedulingHome/SchedulingHome';
+import HomeFooter from '../HomeFooter/HomeFooter';
+import { toggleSideBar } from '../NavBarComponents/SideSearchBar/SideSearchBarActions';
 
 
 const Home = (props) => {
-    // const [products, setProducts] = useState([]);
-    // const [loading, setLoading] = useState(false);
-    // const [error, setError] = useState(false);
-    const { loading, products, error, images } = useSelector((state) => state.Home);
+    const { sideBarOpened } = useSelector((state) => state.SideSearchBar);
     const dispatch = useDispatch()
-    
-    
-    useEffect(() => {
-console.log('password: ',bcrypt.hashSync('1234', 8))
-        dispatch(getImages())
-        dispatch(listProducts())
-    }, [dispatch]);
 
+    const config = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        className: 'banner',
+    };
+
+    const [settings, setSettings] = useState(config);
+
+
+    const onChangeCenterMode = e => {
+        if (e.target.checked) {
+            setSettings({
+                ...config,
+                centerMode: true,
+                centerPadding: '50px'
+            });
+        } else {
+            setSettings(config);
+        }
+    }
+
+    useEffect(() => {
+        console.log('testing in home')
+        dispatch(toggleSideBar(true))
+    }, [])
 
 
     return (
         <div className='home-container' >
-            <div className='cart-container background-image' style={{ backgroundImage: `url('/images/wine-barrel-3.jpeg')` }}>
+            <div className='background-container background-image' style={{ backgroundAttachment: 'fixed', backgroundImage: `url('/images/wine-barrel-3.jpeg')` }}>
                 <div className='sudo-background-black'>
-                <div className='sudo-background-white'>
-            <NavBar />
-            
-            <div>
-                
-                {loading ? (<LoadingBox></LoadingBox>) : error ? (<MessageBox variant='danger' >{error} </MessageBox>) : (
-                    <div className='row center'>
-                        {console.log('this is products in state: ',products)}
-                        { images[0] && images.map((image) => (
-                            console.log('mapped image: ',image)
-                        ))}
-                        { products[0] && products.map((product) => (
-                            <Product key={product._id} product={product}></Product>
-                        ))}
-                        
-                        {/* { orders.map((product) => (
-                            <Product key={product._id} product={product}></Product>
-                        ))} */}
-                    
+                    <SideSearchBar />
+                    <div className={`${sideBarOpened ? 'sudo-background-white-opened' : 'sudo-background-white-closed'}`}>
+                        <NavBar />
+                        <div className='sidebar-container'>
+                            <div>
+                                <Slider {...settings}>
+                                    {bannerImgs && bannerImgs.images.map((item, i) => {
+                                        return <div key={item._id} className="img-card">
+                                            <img className="img" src={item.image[0]} />
+                                            <div className="card-body">
+                                                <div className="card-title">{item.name}</div>
+                                                <div className="card-text">{item.description}</div>
+                                            </div>
+                                        </div>
+                                    })}
+                                </Slider>
+                            </div>
+                        </div>
+                        <SchedulingHome />
+                        <HomeFooter />
                     </div>
-                    
-                )}
+                </div>
             </div>
-        </div>
-        </div>
-        </div>
         </div>
     );
 }
 
 export default Home;
-

@@ -4,8 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import NavBarMini from '../../NavBarComponents/NavBarMini/NavBarMini';
 import { Link } from 'react-router-dom';
 import MessageBox from '../../UtilityComponents/MessageBox/MessageBox';
+import { toggleSideBar } from '../../NavBarComponents/SideSearchBar/SideSearchBarActions';
+import SideSearchBar from '../../NavBarComponents/SideSearchBar/SideSearchBar';
 
 export default function CartScreen(props) {
+
+    const { sideBarOpened } = useSelector((state) => state.SideSearchBar);
+
     const productId = props.match.params.id;
     const dispatch = useDispatch()
     const { cartItems } = useSelector((state) => state.Cart)
@@ -18,6 +23,8 @@ export default function CartScreen(props) {
             dispatch(addToCart(productId, qty))
         }
     }, [dispatch, productId, qty])
+
+  
 
 
     const removeFromCartHandler = (id) => {
@@ -34,10 +41,10 @@ export default function CartScreen(props) {
     return (
         <div className='cart-container  background-image' style={{ backgroundImage: `url('/images/wine-barrel-3.jpeg')` }}>
                 <div className='sudo-background-black'>
-                <div className='sudo-background-white'>
-                <NavBarMini />
-                <div className='row top top-margin'>
-                    <div className='col-2 add-margin'>
+                <SideSearchBar />
+                    <div className={`${sideBarOpened ? 'sudo-background-white-opened' : 'sudo-background-white-closed'}`}>
+                <div className='row top'>
+                    <div className='coll-2'>
                         {cartItems.length === 0 ? (
                             <MessageBox>
                                 Cart is empty. <Link to='/'>Go Shopping</Link>
@@ -70,7 +77,7 @@ export default function CartScreen(props) {
                             </ul>
                         )}
                     </div>
-                    <div className='col-1 add-margin add-width'>
+                    <div className='coll-1'>
                         <div className='card card-body'>
                             <ul>
                                 <li>

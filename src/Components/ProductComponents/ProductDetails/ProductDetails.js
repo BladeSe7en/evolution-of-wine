@@ -9,12 +9,14 @@ import MessageBox from '../../UtilityComponents/MessageBox/MessageBox';
 import NavBarMini from '../../NavBarComponents/NavBarMini/NavBarMini';
 import Rating from '../Rating/Rating';
 import { getProductDetails } from './ProductDetailsActions';
+import SideSearchBar from '../../NavBarComponents/SideSearchBar/SideSearchBar';
 
 export default function ProductDetails(props) {
     const dispatch = useDispatch();
     const productId = props.match.params.id
     console.log('productId: ', productId)
     const { loading, productInfo, error } = useSelector((state) => state.ProductDetails);
+    const { sideBarOpened } = useSelector((state) => state.SideSearchBar);
     const [qty, setQty] = useState(1);
 
     useEffect(() => {
@@ -30,7 +32,8 @@ export default function ProductDetails(props) {
     return (
         <div className='details-container background-image' style={{ backgroundImage: `url('/images/wine-barrel-3.jpeg')` }}>
             <div className='sudo-background-black padding-bottom'>
-                <div className='sudo-background-white'></div>
+            <SideSearchBar />
+                    <div className={`${sideBarOpened ? 'sudo-background-white-opened' : 'sudo-background-white-closed'}`}>
                 {loading ? (
                     <LoadingBox></LoadingBox>
                 ) : error || productInfo.lenght === 0 ? (
@@ -39,11 +42,11 @@ export default function ProductDetails(props) {
                     <div>
                         <NavBarMini />
                         <div className="row top">
-                            <div className="col-2">
+                            <div className="coll-2">
                                 <ImageCarousel productInfo={productInfo} />
 
                             </div>
-                            <div className="col-1 padding-left">
+                            <div className="coll-1 padding-left">
                                 <ul>
                                     <li>
                                         <h1>{productInfo.name}</h1>
@@ -61,7 +64,7 @@ export default function ProductDetails(props) {
                                     </li>
                                 </ul>
                             </div>
-                            <div className="col-1">
+                            <div className="coll-1">
                                 <div className="card card-body">
                                     <ul>
                                         <li>
@@ -112,6 +115,7 @@ export default function ProductDetails(props) {
 
                     </div>
                 )}
+            </div>
             </div>
         </div>
     );

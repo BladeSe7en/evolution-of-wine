@@ -10,6 +10,8 @@ import { payOrder } from '../Cart/CartActions';
 //import { orderPayReset } from '../PlaceOrderScreen/PlaceOrderScreenActions';
 import NavBarMini from '../../NavBarComponents/NavBarMini/NavBarMini';
 import { deliverOrder } from '../../AdminComponents/AdminOrdersList/AdminOrdersListActions';
+import { toggleSideBar } from '../../NavBarComponents/SideSearchBar/SideSearchBarActions';
+import SideSearchBar from '../../NavBarComponents/SideSearchBar/SideSearchBar';
 
 export default function OrderScreen(props) {
     const orderId = props.match.params.id;
@@ -19,7 +21,8 @@ export default function OrderScreen(props) {
     const { order } = useSelector((state) => state.OrdersReturns);
     const { successPay, errorPay, loadingPay } = useSelector((state) => state.Cart);
     const { deliverOrderSuccess,  adminListLoading, adminListError, adminListAllOrders, adminDeleteOrderSuccess, adminDeleteOrderError, AdminDeleteOrderLoadin } = useSelector((state) => state.AdminOrdersList);
-    
+    const { sideBarOpened } = useSelector((state) => state.SideSearchBar);
+
 
 
     const dispatch = useDispatch();
@@ -61,6 +64,11 @@ export default function OrderScreen(props) {
         dispatch(deliverOrder(order._id, user));
     };
 
+    useEffect(() => {
+        console.log('testing in home')
+        dispatch(toggleSideBar(true))
+    }, [])
+
 
     return loading ? (
         <LoadingBox></LoadingBox>
@@ -68,13 +76,14 @@ export default function OrderScreen(props) {
         <MessageBox variant="danger">{error}</MessageBox>
     ) : (
         <div>
-            <NavBarMini />
+            <SideSearchBar />
+                    <div className={`${sideBarOpened ? 'sudo-background-white-opened' : 'sudo-background-white-closed'}`}>
             <h1 className = 'top'>Order {order._id && order._id}</h1>
             <div className="row top">
-                <div className="col-2">
+                <div className="coll-2">
                     <ul>
                         <li>
-                            <div className="card card-body">
+                            <div id = 'padding' className="card card-body">
                                 <h2>Shipping</h2>
                                 <p>
                                     <strong>Name:</strong> {order._id && order.shippingAddress.fullName} <br />
@@ -93,7 +102,7 @@ export default function OrderScreen(props) {
                             </div>
                         </li>
                         <li>
-                            <div className="card card-body">
+                            <div  id = 'padding' className="card card-body">
                                 <h2>Payment</h2>
                                 <p>
                                     <strong>Method:</strong> {order._id && order.paymentMethod}
@@ -108,7 +117,7 @@ export default function OrderScreen(props) {
                             </div>
                         </li>
                         <li>
-                            <div className="card card-body">
+                            <div id = 'padding' className="card card-body">
                                 <h2>Order Items</h2>
                                 <ul>
                                     {order._id && order.cartItems.map((item) => (
@@ -138,8 +147,8 @@ export default function OrderScreen(props) {
                         </li>
                     </ul>
                 </div>
-                <div className="col-1">
-                    <div className="card card-body">
+                <div className="coll-1">
+                    <div id = 'padding' className="card card-body">
                         <ul>
                             <li>
                                 <h2>Order Summary</h2>
@@ -209,6 +218,7 @@ export default function OrderScreen(props) {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 }

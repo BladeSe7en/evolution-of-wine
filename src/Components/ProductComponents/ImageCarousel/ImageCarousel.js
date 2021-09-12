@@ -22,7 +22,7 @@ const ImageCarousel = (props) => {
                 {productInfo._id && productInfo.image.map((item, i) => (
                     <div key = {productInfo._id+i}>
                         <img src={item} alt={productInfo.name} />
-                        <p className="legend">Legend {i}</p>
+                        <p className="legend">This is a test {i}</p>
                     </div>
                 ))}
             </Carousel>
